@@ -8,10 +8,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Monster
 {
-    interface IMonster:IBaseHero
+    public interface IMonster:IBaseHero
     {
         public int GetExp();
 
         public bool IsAlive();
+
+        public void Attack(IBaseHero targetGuy);
     }
 }

@@ -16,20 +16,22 @@ namespace ConsoleApp1.Skill
         //傷害倍率
         double damageM = 1.2;
 
-        public bool Attack(IHero useHero, IBaseHero targetMoster)
+        int costMp = 0;
+
+        public bool Attack(IBaseHero useHero, IBaseHero targetMoster)
         {
             
             int damage = (int)(useHero.GetStr() * damageM);
 
-            Console.WriteLine("對 {0} , 使用 {1}, 造成 {2} 點傷害", 
+            Console.WriteLine("{0} 對 {1} , 使用 {2}, 造成 {3} 點傷害",
+                useHero.GetName(),
                 targetMoster.GetName(),
                 this.GetName(),
                 damage);
-            targetMoster.LoseHp(damage);
 
             if(targetMoster.LoseHp(damage) <= 0)
             {
-                Console.WriteLine("{0} 死亡",
+                Console.WriteLine("{0} 死亡 !!!",
                 targetMoster.GetName());
             }
 
@@ -44,6 +46,11 @@ namespace ConsoleApp1.Skill
         public string GetName()
         {
             return this.Name;
+        }
+
+        public int GetCostMp()
+        {
+            return this.costMp;
         }
     }
 }

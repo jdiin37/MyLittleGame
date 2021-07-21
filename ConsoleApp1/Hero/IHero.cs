@@ -7,8 +7,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Hero
 {
-    interface IHero:IBaseHero
+    public interface IHero:IBaseHero
     {
+
+        public bool SetName(string name);
+
+        public void ShowStatus();
 
         public bool CheckMp(int costMp);
 
@@ -17,6 +21,10 @@ namespace ConsoleApp1.Hero
 
         public void UseSkill(string skillName, IBaseHero targetGuy);
 
-        
+        public void UseNormalAttack(IBaseHero targetGuy);
+
+
+        public void AddExp(int exp);
+
     }
 }

@@ -9,12 +9,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1
 {
-    interface ISkill
+    public interface ISkill
     {
-        public bool Attack(IHero useHero,IBaseHero targetMoster);
+        public bool Attack(IBaseHero useHero,IBaseHero targetMoster);
 
         public string GetName();
 
         public int GetId();
+
+        public int GetCostMp();
     }
 }

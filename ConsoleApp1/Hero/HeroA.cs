@@ -11,6 +11,7 @@ namespace ConsoleApp1.Hero
     class HeroA : IHero
     {
         public string Name = "英雄A";
+        public int Exp = 0;
 
         public int MaxHp = 300;
         public int Hp = 300;
@@ -63,35 +64,45 @@ namespace ConsoleApp1.Hero
         public string AddSkill(ISkill skill)
         {
             this.SkillList.Add(skill);
-            Console.WriteLine("已習得 {0}", skill.GetName());
+            Console.WriteLine(" [{0}] 已習得 {1} ", this.GetName(), skill.GetName());
 
             return "已習得" + skill.GetName();
         }
 
         public string[] ShowSkillList()
         {
-            Console.WriteLine("----技能清單----");
+            Console.WriteLine("[技能清單]");
             int index = 0;
             foreach (var skill in SkillList)
             {
                 Console.WriteLine("{0}. {1}",++index, skill.GetName());
             }
-            Console.WriteLine("--------------");
+            Console.WriteLine("請輸入正確名稱來使用技能.....");
 
             return this.SkillList.Select(x => x.GetName()).ToArray();
         }
 
+        public void UseNormalAttack(IBaseHero targetGuy)
+        {
+            ISkill normalAttack = new NormalAttack();
+            normalAttack.Attack(this, targetGuy);
+        }
 
         void IHero.UseSkill(string skillName,IBaseHero targetGuy)
         {
             ISkill skill= this.SkillList.FirstOrDefault(x => x.GetName() == skillName);
             if (skill!=null)
             {
-                if (!skill.Attack(this, targetGuy))
+                if (this.CheckMp(skill.GetCostMp()))
                 {
-                    ISkill normalAttack = new NormalAttack();
-                    normalAttack.Attack(this, targetGuy);
-                };
+                    skill.Attack(this, targetGuy);
+                }
+                else
+                {
+                    Console.WriteLine("MP 不足");
+                    return ;
+                }
+                
             }
             else
             {
@@ -124,6 +135,43 @@ namespace ConsoleApp1.Hero
         public bool CheckMp(int costMp)
         {
             return this.Mp >= costMp;
+        }
+
+        public bool SetName(string name)
+        {
+            this.Name = name;
+            return true;
+        }
+
+        public string GetName()
+        {
+            return this.Name;
+        }
+
+
+        public int GetHp()
+        {
+            return this.Hp;
+        }
+
+        public int GetMp()
+        {
+            return this.Mp;
+        }
+
+        public void AddExp(int exp)
+        {
+            Console.WriteLine("獲得 {0} 點經驗值", exp);
+
+            this.Exp += exp;
+        }
+
+        public void ShowStatus()
+        {
+            Console.WriteLine("目前狀態");
+            Console.WriteLine("Hp : {0}",this.Hp);
+            Console.WriteLine("Mp : {0}", this.Mp);
+            Console.WriteLine("Exp : {0}", this.Exp);
         }
     }
 }

@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Skill;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,12 +13,12 @@ namespace ConsoleApp1.Monster
         public string Name = "史萊姆";
 
         public int MaxHp = 100;
-        public int Hp = 500;
+        public int Hp = 100;
 
         public int MaxMp = 50;
         public int Mp = 50;
 
-        public int Str = 10;
+        public int Str = 16;
         public int Int = 5;
 
         public int Defense = 0;
@@ -81,9 +83,10 @@ namespace ConsoleApp1.Monster
             throw new NotImplementedException();
         }
 
-        public void Attack()
+        public void Attack(IBaseHero targetGuy)
         {
-            throw new NotImplementedException();
+            ISkill normalAttack = new NormalAttack();
+            normalAttack.Attack(this, targetGuy);
         }
 
         public string GetName()
@@ -94,6 +97,16 @@ namespace ConsoleApp1.Monster
         bool IMonster.IsAlive()
         {
             return this.Hp > 0;
+        }
+
+        public int GetHp()
+        {
+            return this.Hp;
+        }
+
+        public int GetMp()
+        {
+            return this.Mp;
         }
     }
 }

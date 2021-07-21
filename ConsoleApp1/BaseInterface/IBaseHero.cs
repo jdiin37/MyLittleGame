@@ -6,9 +6,12 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.BaseInterface
 {
-    interface IBaseHero
+    public interface IBaseHero
     {
         public string GetName();
+
+        public int GetHp();
+        public int GetMp();
 
         public int GetInt();
 
