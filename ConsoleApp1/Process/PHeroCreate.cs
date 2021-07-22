@@ -35,5 +35,12 @@ namespace ConsoleApp1.Process
             theHero.AddSkill(defaultSkill);
             
         }
+
+        public void HeroChangeJob(IHero theHero,IHeroJob job)
+        {
+
+            theHero.ChangeJob(job);
+
+        }
     }
 }

@@ -32,12 +32,15 @@ namespace ConsoleApp1.Controller
 
         public void ShowMenu()
         {
-            Console.WriteLine("==冒險選單==");
-            Console.WriteLine("[1] 查看狀態");
-            Console.WriteLine("[2] 打怪");
-            Console.WriteLine("[3] 吃飯");
-            Console.WriteLine("[4] 喝飲料");
-            Console.WriteLine("[9] 離開遊戲");
+            Console.WriteLine(" ");
+            Console.WriteLine(" [{0}] 您想做什麼呢 ?", hero.GetName());
+            Console.WriteLine("@=====冒險選單=====@");
+            Console.WriteLine(" [1] 查看狀態");
+            Console.WriteLine(" [2] 打怪");
+            Console.WriteLine(" [3] 吃飯");
+            Console.WriteLine(" [4] 喝飲料");
+            Console.WriteLine(" [9] 離開遊戲");
+            Console.WriteLine("@==================@");
 
             InputCmd();
 

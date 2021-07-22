@@ -13,10 +13,12 @@ namespace ConsoleApp1.Controller
         PHeroCreate pHeroCreate;
         AdventureMeun adventureMeun;
         IHero heroA;
+        IHeroJob heroJob;
 
         public MainMeun()
         {
             pHeroCreate = new PHeroCreate();
+            heroJob = new JobA();
             heroA = new HeroA();
             
         }
@@ -27,7 +29,8 @@ namespace ConsoleApp1.Controller
             if (Console.ReadLine() == "Y")
             {
                 pHeroCreate.StartNaming(heroA);
-                pHeroCreate.GetDefaultSkill(heroA);
+                //pHeroCreate.GetDefaultSkill(heroA);
+                pHeroCreate.HeroChangeJob(heroA,heroJob);
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())

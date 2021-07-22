@@ -26,5 +26,6 @@ namespace ConsoleApp1.Hero
 
         public void AddExp(int exp);
 
+        public void ChangeJob(IHeroJob job);
     }
 }

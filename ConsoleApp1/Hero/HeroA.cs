@@ -11,6 +11,7 @@ namespace ConsoleApp1.Hero
     class HeroA : IHero
     {
         public string Name = "英雄A";
+        public int Lv = 1;
         public int Exp = 0;
 
         public int MaxHp = 300;
@@ -25,6 +26,9 @@ namespace ConsoleApp1.Hero
         public int Defense = 10;
 
         public List<ISkill> SkillList = new List<ISkill>();
+
+        public IHeroJob Job;
+
         #region HP MP setter
         int IBaseHero.AddHp(int addHp)
         {
@@ -164,14 +168,24 @@ namespace ConsoleApp1.Hero
             Console.WriteLine("獲得 {0} 點經驗值", exp);
 
             this.Exp += exp;
+
+            
         }
+
+     
+
 
         public void ShowStatus()
         {
             Console.WriteLine("目前狀態");
-            Console.WriteLine("Hp : {0}",this.Hp);
-            Console.WriteLine("Mp : {0}", this.Mp);
-            Console.WriteLine("Exp : {0}", this.Exp);
+            Console.WriteLine("|Hp : {0} |Mp : {1} |Exp : {2}", this.Hp, this.Mp, this.Exp);
+            Console.WriteLine("|力量 : {0} |智力 : {1} |防禦 : {2}", this.Str, this.Int, this.Defense);
+            
+        }
+
+        public void ChangeJob(IHeroJob job)
+        {
+            throw new NotImplementedException();
         }
     }
 }
