@@ -13,8 +13,10 @@ namespace ConsoleApp1
             Console.WriteLine("!!!^___^!!!");
 
             MainMeun mainMeun = new();
-
-            mainMeun.Start();
+            while (!mainMeun.IsExitGame)
+            {
+                mainMeun.ShowMenu();
+            }
 
 
 

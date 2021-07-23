@@ -27,6 +27,8 @@ namespace ConsoleApp1.Process
             }
         }
 
+
+
         public void GetDefaultSkill(IHero theHero)
         {
 
@@ -35,6 +37,23 @@ namespace ConsoleApp1.Process
             theHero.AddSkill(defaultSkill);
             
         }
+
+        public void GetDefaultJob(IHero hero)
+        {
+
+            IHeroJob heroJob;
+            if (hero.GetName() == "咖波")
+            {
+                heroJob = new JobDarkKnight();
+            }
+            else
+            {
+                heroJob = new JobA();
+            }
+
+            HeroChangeJob(hero, heroJob);
+        }
+
 
         public void HeroChangeJob(IHero theHero,IHeroJob job)
         {

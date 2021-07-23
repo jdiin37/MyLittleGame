@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Skill
 {
-    class FireBall : ISkill
+    class Blizzard : ISkill
     {
-        string Name = "火球術";
+        string Name = "暴風雪";
 
         //傷害倍率
-        int damageM = 2;
-        public int costMp = 10;
+        int damageM = 9;
+        public int costMp = 30;
 
         public bool Attack(IBaseHero useHero, IBaseHero targetMoster)
         {

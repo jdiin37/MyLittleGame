@@ -1,20 +1,14 @@
 ﻿using ConsoleApp1.BaseInterface;
-using ConsoleApp1.Hero;
-using ConsoleApp1.Monster;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Skill
 {
-    class NormalAttack : ISkill
+    class StrongAttack : ISkill
     {
-        string Name = "普通攻擊";
+        string Name = "強力攻擊";
 
         //傷害倍率
-        double damageM = 1.2;
+        double damageM = 1.8;
 
         int costMp = 0;
 
