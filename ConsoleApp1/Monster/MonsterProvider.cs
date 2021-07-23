@@ -15,6 +15,9 @@ namespace ConsoleApp1.Monster
             monstersList.Add(new Monster1());
             monstersList.Add(new Monster2());
             monstersList.Add(new MonsterBoss1());
+            monstersList.Add(new Monster3());
+            monstersList.Add(new Monster4());
+            monstersList.Add(new Monster5());
             return monstersList;
             
         }

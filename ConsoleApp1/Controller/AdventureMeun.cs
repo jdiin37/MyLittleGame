@@ -39,9 +39,8 @@ namespace ConsoleApp1.Controller
             Console.WriteLine("@=====冒險選單=====@");
             Console.WriteLine(" [1] 查看狀態");
             Console.WriteLine(" [2] 打怪");
-            Console.WriteLine(" [3] 吃飯");
-            Console.WriteLine(" [4] 喝飲料");
-            Console.WriteLine(" [5] 閒聊");
+            Console.WriteLine(" [3] 休息");
+            Console.WriteLine(" [4] 閒聊");
             Console.WriteLine(" [Exit] 離開遊戲");
             Console.WriteLine("@==================@");
 
@@ -62,13 +61,9 @@ namespace ConsoleApp1.Controller
             }
             else if (cmd == "3")
             {
-                EatSomthing();
+                TakeBreak();
             }
             else if (cmd == "4")
-            {
-                DrinkSomthing();
-            }
-            else if (cmd == "5")
             {
                 TalkSomthing();
             }
@@ -84,18 +79,24 @@ namespace ConsoleApp1.Controller
             pTalkSomething.GetATalk();
         }
 
-        private void EatSomthing()
+        private void TakeBreak()
         {
-            int addHp = 50;
-            Console.WriteLine(" 吃了 {0} ,補充 {1} 點 HP", "肉燥飯", addHp);
-            hero.AddHp(addHp);
+            hero.AddHp(9999);
+            hero.AddMp(9999);
+            Console.WriteLine(" 適當的休息過後, 您覺得精神書醒 ");
         }
-        private void DrinkSomthing()
-        {
-            int addMp = 20;
-            Console.WriteLine(" 喝了 {0} ,補充 {1} 點 MP", "寶礦力水得", addMp);
-            hero.AddMp(addMp);
-        }
+        //private void EatSomthing()
+        //{
+        //    int addHp = 50;
+        //    Console.WriteLine(" 吃了 {0} ,補充 {1} 點 HP", "肉燥飯", addHp);
+        //    hero.AddHp(addHp);
+        //}
+        //private void DrinkSomthing()
+        //{
+        //    int addMp = 20;
+        //    Console.WriteLine(" 喝了 {0} ,補充 {1} 點 MP", "寶礦力水得", addMp);
+        //    hero.AddMp(addMp);
+        //}
 
         private void ShowHeroStatus()
         {
