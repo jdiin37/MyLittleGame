@@ -12,6 +12,8 @@ namespace ConsoleApp1.Monster
     {
         public int GetExp();
 
+        public void GetStatus();
+
         public bool IsAlive();
 
         public void Attack(IBaseHero targetGuy);

@@ -13,6 +13,7 @@ namespace ConsoleApp1.Hero
         public string Name = "英雄A";
         public int Lv = 1;
         public int Exp = 0;
+        public int LvUpExp = 0;
 
         public int MaxHp = 300;
         public int Hp = 300;
@@ -27,6 +28,13 @@ namespace ConsoleApp1.Hero
         public List<ISkill> SkillList = new List<ISkill>();
 
         public IHeroJob Job;
+        public IHeroExpCalculater HeroExpCalculater;
+
+        public HeroA()
+        {
+            HeroExpCalculater = new HeroExpCalculater();
+            LvUpExp = HeroExpCalculater.GetHeroLvUpExp(this);
+        }
 
         #region HP MP setter
         int IBaseHero.AddHp(int addHp)
@@ -168,16 +176,42 @@ namespace ConsoleApp1.Hero
 
             this.Exp += exp;
 
-            
+            IsLvUp();
         }
 
 
+        private void IsLvUp()
+        {
+            while (this.Exp >= this.LvUpExp)
+            {
+                LvUp();
+            }
+        }
+
+        private void LvUp()
+        {
+            this.Lv += 1;
+            this.Str += Job.GetLvUpAddStr();
+            this.Int += Job.GetLvUpAddInt();
+            this.Defense += Job.GetLvUpAddDefense();
+            this.MaxHp += Job.GetLvUpAddHp();
+            this.MaxMp += Job.GetLvUpAddMp();
+            Console.WriteLine(" [{0}] 等級提升為 {1}", this.Name, this.Lv);
+            Console.WriteLine(" HP上限提升 {0} 點, MP上限提升 {1} 點", Job.GetLvUpAddHp(), Job.GetLvUpAddMp());
+            Console.WriteLine(" 力量提升 {0} 點", Job.GetLvUpAddStr());
+            Console.WriteLine(" 智力提升 {0} 點", Job.GetLvUpAddInt());
+            Console.WriteLine(" 防禦提升 {0} 點", Job.GetLvUpAddDefense());
+
+            this.LvUpExp = HeroExpCalculater.GetHeroLvUpExp(this);
+        }
+
         public void ShowStatus()
         {
-            Console.WriteLine("目前狀態");
-            Console.WriteLine("|Hp : {0} |Mp : {1} |Exp : {2}", this.Hp, this.Mp, this.Exp);
+            Console.WriteLine(" ");
+            Console.WriteLine("目前狀態 : ");
+            Console.WriteLine("|Hp : {0}/{1} |Mp : {2}/{3} |職業 : {4}", this.Hp, this.MaxHp, this.Mp, this.MaxMp, this.Job.GetName());
             Console.WriteLine("|力量 : {0} |智力 : {1} |防禦 : {2}", this.Str, this.Int, this.Defense);
-            Console.WriteLine("|Lv : {0} |職業 : {1}", this.Lv, this.Job.GetName());
+            Console.WriteLine("|Lv : {0} |Exp : {1}/{2}", this.Lv, this.Exp, this.LvUpExp);
         }
 
         public void ChangeJob(IHeroJob job)
@@ -194,6 +228,16 @@ namespace ConsoleApp1.Hero
             {
                 this.AddSkill(skill);
             }
+        }
+
+        public int GetLv()
+        {
+            return this.Lv;
+        }
+
+        public int GetExp()
+        {
+            return this.Exp;
         }
     }
 }

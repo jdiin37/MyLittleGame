@@ -24,28 +24,24 @@ namespace ConsoleApp1.Controller
             this.targetGuy = targetGuy;            
         }
 
-        public bool isBattleFinish()
+        public bool IsBattleFinish()
         {
-            if (isRunAway)
-            {
-                return true;
-            }
+            return (isRunAway || hero.GetHp() <= 0 || !targetGuy.IsAlive());            
+        }
 
-            if(hero.GetHp() <= 0)
-            {
-                return true;
-            }
-
-            if (targetGuy.IsAlive())
-            {
-                return false;
-            }
-            else
+        public void GetBattleReward()
+        {
+            if (!targetGuy.IsAlive())
             {
                 GetMonsterExp();
-                return true;
             }
-
+            else if(hero.GetHp() <= 0)
+            {
+                Console.WriteLine(" \"請再好好休息後再來吧..\"");
+            }else if (isRunAway)
+            {
+                Console.WriteLine(" [{0}] 逃跑成功..",hero.GetName());
+            }
         }
 
         private void GetMonsterExp()
@@ -56,10 +52,11 @@ namespace ConsoleApp1.Controller
         public void ShowMenu()
         {
             hero.ShowStatus();
-            Console.WriteLine("==戰鬥選單==");
+            Console.WriteLine("!====戰鬥選單====!");
             Console.WriteLine("[1] 使用普功");
             Console.WriteLine("[2] 使用技能");
             Console.WriteLine("[3] 逃跑");
+            Console.WriteLine("!===============!");
 
             InputCmd();
         }
@@ -106,7 +103,6 @@ namespace ConsoleApp1.Controller
         private void RunAway()
         {
             isRunAway = true;
-            Console.WriteLine("逃跑成功");
         }
     }
 }

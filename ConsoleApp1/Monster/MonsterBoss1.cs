@@ -8,22 +8,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Monster
 {
-    class Monster1 : IMonster
+    class MonsterBoss1 : IMonster
     {
-        public string Name = "哥布林";
-        public int Lv = 1;
+        public string Name = "蔡英文";
+        public int Lv = 10;
 
-        public int MaxHp = 100;
-        public int Hp = 100;
+        public int MaxHp = 200;
+        public int Hp = 200;
 
         public int MaxMp = 50;
         public int Mp = 50;
 
-        public int Str = 10;
+        public int Str = 100;
         public int Int = 5;
 
         public int Defense = 0;
-        public int Exp = 50;
+        public int Exp = 700;
 
         #region property getter setter
         public int AddHp(int addHp)
@@ -77,18 +77,6 @@ namespace ConsoleApp1.Monster
         {
             return this.Exp;
         }
-        #endregion
-
-        public void UseSkill()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Attack(IBaseHero targetGuy)
-        {
-            ISkill normalAttack = new NormalAttack();
-            normalAttack.Attack(this, targetGuy);
-        }
 
         public string GetName()
         {
@@ -119,5 +107,20 @@ namespace ConsoleApp1.Monster
         {
             throw new NotImplementedException();
         }
+
+        #endregion
+
+        public void UseSkill()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void Attack(IBaseHero targetGuy)
+        {
+            ISkill normalAttack = new NormalAttack();
+            normalAttack.Attack(this, targetGuy);
+        }
+
+        
     }
 }

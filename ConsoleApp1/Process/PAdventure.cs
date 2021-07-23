@@ -14,39 +14,38 @@ namespace ConsoleApp1.Process
     {
 
         static Random rnd = new Random();
+        IMonsterProvider MonsterProvider;
 
 
         public PAdventure()
         {
-            
+            this.MonsterProvider = new MonsterProvider();
         }
 
         public void EncounterMonster(IHero theHero)
         {
-            IMonster monster = GetRandomMonster();
+            IMonster monster = GetRandomMonster(theHero);
             Console.WriteLine("!!!!!! 遭遇到 {0} !!!!!!", monster.GetName());
 
-            BattleMeun newBattle = new BattleMeun(theHero, monster);
-            while (!newBattle.isBattleFinish())
+            StartBattle(theHero, monster);
+        }
+
+        private void StartBattle(IHero hero,IMonster monster)
+        {
+            BattleMeun newBattle = new BattleMeun(hero, monster);
+            while (!newBattle.IsBattleFinish())
             {
                 newBattle.ShowMenu();
             }
+            newBattle.GetBattleReward();
         }
 
-        private IMonster GetRandomMonster()
+        private IMonster GetRandomMonster(IHero theHero)
         {
-            List<IMonster> MonstersList = GetAllMonster();
+            List<IMonster> MonstersList = MonsterProvider.GetMonstersFitHero(theHero);
             int r = rnd.Next(MonstersList.Count);
             return MonstersList[r];
         }
 
-        private List<IMonster> GetAllMonster()
-        {
-            List<IMonster> monstersList = new List<IMonster>();
-            monstersList.Add(new Monster1());
-            monstersList.Add(new Monster2());
-            return monstersList;
-        }
-       
     }
 }

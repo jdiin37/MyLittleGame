@@ -11,7 +11,7 @@ namespace ConsoleApp1.Monster
     class Monster2 : IMonster
     {
         public string Name = "史萊姆";
-
+        public int Lv = 2;
         public int MaxHp = 100;
         public int Hp = 100;
 
@@ -107,6 +107,16 @@ namespace ConsoleApp1.Monster
         public int GetMp()
         {
             return this.Mp;
+        }
+
+        public int GetLv()
+        {
+            return this.Lv;
+        }
+
+        public void GetStatus()
+        {
+            throw new NotImplementedException();
         }
     }
 }

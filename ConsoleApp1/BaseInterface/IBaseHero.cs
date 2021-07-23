@@ -10,6 +10,7 @@ namespace ConsoleApp1.BaseInterface
     {
         public string GetName();
 
+        public int GetLv();
         public int GetHp();
         public int GetMp();
 

@@ -15,6 +15,7 @@ namespace ConsoleApp1.Controller
 
         IHero hero;
         PAdventure pAdventure;
+        PTalkSomething pTalkSomething;
 
         private bool isFinish = false;
 
@@ -27,6 +28,7 @@ namespace ConsoleApp1.Controller
         {
             this.hero = hero;
             pAdventure = new PAdventure();
+            pTalkSomething = new PTalkSomething();
         }
 
 
@@ -39,7 +41,8 @@ namespace ConsoleApp1.Controller
             Console.WriteLine(" [2] 打怪");
             Console.WriteLine(" [3] 吃飯");
             Console.WriteLine(" [4] 喝飲料");
-            Console.WriteLine(" [9] 離開遊戲");
+            Console.WriteLine(" [5] 閒聊");
+            Console.WriteLine(" [Exit] 離開遊戲");
             Console.WriteLine("@==================@");
 
             InputCmd();
@@ -65,11 +68,20 @@ namespace ConsoleApp1.Controller
             {
                 DrinkSomthing();
             }
-            else if (cmd == "9")
+            else if (cmd == "5")
+            {
+                TalkSomthing();
+            }
+            else if (cmd == "Exit")
             {
                 ExitGame();
             }
 
+        }
+
+        private void TalkSomthing()
+        {
+            pTalkSomething.GetATalk();
         }
 
         private void EatSomthing()

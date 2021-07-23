@@ -18,21 +18,21 @@ namespace ConsoleApp1.Skill
 
         int costMp = 0;
 
-        public bool Attack(IBaseHero useHero, IBaseHero targetMoster)
+        public bool Attack(IBaseHero useHero, IBaseHero targetGuy)
         {
             
-            int damage = (int)(useHero.GetStr() * damageM);
+            int damage = (int)(useHero.GetStr() * damageM - targetGuy.GetDefense());
 
             Console.WriteLine("{0} 對 {1} , 使用 {2}, 造成 {3} 點傷害",
                 useHero.GetName(),
-                targetMoster.GetName(),
+                targetGuy.GetName(),
                 this.GetName(),
                 damage);
 
-            if(targetMoster.LoseHp(damage) <= 0)
+            if(targetGuy.LoseHp(damage) <= 0)
             {
                 Console.WriteLine("{0} 死亡 !!!",
-                targetMoster.GetName());
+                targetGuy.GetName());
             }
 
             return true;
