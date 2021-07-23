@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Process
 {
-    class PHeroCreate
+    class PHeroBehavior
     {
         public void StartNaming(IHero theHero)
         {

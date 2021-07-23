@@ -8,6 +8,12 @@ namespace ConsoleApp1.Hero
 {
     public interface IHeroJob
     {
+        public int GetStr();
+        public int GetInt();
+        public int GetDefense();
 
+        public string GetName();
+
+        public List<ISkill> GetSkills();
     }
 }

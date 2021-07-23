@@ -10,14 +10,14 @@ namespace ConsoleApp1.Controller
 {
     public class MainMeun
     {
-        PHeroCreate pHeroCreate;
+        PHeroBehavior pHeroBehavior;
         AdventureMeun adventureMeun;
         IHero heroA;
         IHeroJob heroJob;
 
         public MainMeun()
         {
-            pHeroCreate = new PHeroCreate();
+            pHeroBehavior = new PHeroBehavior();
             heroJob = new JobA();
             heroA = new HeroA();
             
@@ -28,9 +28,9 @@ namespace ConsoleApp1.Controller
 
             if (Console.ReadLine() == "Y")
             {
-                pHeroCreate.StartNaming(heroA);
+                pHeroBehavior.StartNaming(heroA);
                 //pHeroCreate.GetDefaultSkill(heroA);
-                pHeroCreate.HeroChangeJob(heroA,heroJob);
+                pHeroBehavior.HeroChangeJob(heroA,heroJob);
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())

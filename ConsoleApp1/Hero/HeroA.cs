@@ -20,10 +20,9 @@ namespace ConsoleApp1.Hero
         public int MaxMp = 50;
         public int Mp = 50;
 
-        public int Str = 20;
-        public int Int = 15;
-
-        public int Defense = 10;
+        public int Str = 1;
+        public int Int = 1;
+        public int Defense = 1;
 
         public List<ISkill> SkillList = new List<ISkill>();
 
@@ -172,20 +171,29 @@ namespace ConsoleApp1.Hero
             
         }
 
-     
-
 
         public void ShowStatus()
         {
             Console.WriteLine("目前狀態");
             Console.WriteLine("|Hp : {0} |Mp : {1} |Exp : {2}", this.Hp, this.Mp, this.Exp);
             Console.WriteLine("|力量 : {0} |智力 : {1} |防禦 : {2}", this.Str, this.Int, this.Defense);
-            
+            Console.WriteLine("|Lv : {0} |職業 : {1}", this.Lv, this.Job.GetName());
         }
 
         public void ChangeJob(IHeroJob job)
         {
-            throw new NotImplementedException();
+            this.Job = job;
+            this.Str = job.GetStr();
+            this.Int = job.GetInt();
+            this.Defense = job.GetDefense();
+
+
+            Console.WriteLine(" [{0}] 已轉職成 ={1}=",this.Name,job.GetName());
+
+            foreach(var skill in job.GetSkills())
+            {
+                this.AddSkill(skill);
+            }
         }
     }
 }
