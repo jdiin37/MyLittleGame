@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Monster.Model;
 using ConsoleApp1.Skill;
 using System;
 using System.Collections.Generic;
@@ -8,22 +9,39 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Monster
 {
-    class Monster4 : IMonster
+    public class MonsterBoss : IMonster
     {
-        public string Name = "小精靈";
-        public int Lv = 5;
+        public string Name;
+        public int Lv;
 
-        public int MaxHp = 150;
-        public int Hp = 150;
+        public int MaxHp;
+        public int Hp;
 
-        public int MaxMp = 50;
-        public int Mp = 50;
+        public int MaxMp;
+        public int Mp;
 
-        public int Str = 22;
-        public int Int = 7;
+        public int Str;
+        public int Int;
 
-        public int Defense = 0;
-        public int Exp = 276;
+        public int Defense;
+        public int Exp;
+
+        public List<ISkill> SkillList;
+
+        public MonsterBoss(MonsterProperty monsterProperty, List<ISkill> skillList)
+        {
+            Name = monsterProperty.Name;
+            Lv = monsterProperty.Lv;
+            MaxHp = monsterProperty.MaxHp;
+            Hp = monsterProperty.MaxHp;
+            MaxMp = monsterProperty.MaxMp;
+            Mp = monsterProperty.MaxMp;
+            Str = monsterProperty.Str;
+            Int = monsterProperty.Int;
+            Defense = monsterProperty.Defense;
+            Exp = monsterProperty.Exp;
+            SkillList = skillList;
+        }
 
         #region property getter setter
         public int AddHp(int addHp)
@@ -77,6 +95,21 @@ namespace ConsoleApp1.Monster
         {
             return this.Exp;
         }
+        #endregion
+
+
+        public ISkill ChoseSkill()
+        {
+            Random rnd = new();
+            int r = rnd.Next(SkillList.Count);
+            return SkillList[r];
+        }
+
+        public void Attack(IBaseHero targetGuy)
+        {
+            ISkill normalAttack = ChoseSkill();
+            normalAttack.Attack(this, targetGuy);
+        }
 
         public string GetName()
         {
@@ -107,20 +140,5 @@ namespace ConsoleApp1.Monster
         {
             throw new NotImplementedException();
         }
-
-        #endregion
-
-        public void UseSkill()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void Attack(IBaseHero targetGuy)
-        {
-            ISkill normalAttack = new FireBall();
-            normalAttack.Attack(this, targetGuy);
-        }
-
-        
     }
 }

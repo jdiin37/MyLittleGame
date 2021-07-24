@@ -1,4 +1,7 @@
 ﻿using ConsoleApp1.Hero;
+using ConsoleApp1.Monster.Lib;
+using ConsoleApp1.Monster.Model;
+using ConsoleApp1.Skill;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,16 +12,18 @@ namespace ConsoleApp1.Monster
 {
     public class MonsterProvider : IMonsterProvider
     {
+
+        IMonsterLib MonsterLib;
+
+        public MonsterProvider(IMonsterLib IMonsterLib)
+        {
+            MonsterLib = IMonsterLib;
+        }
+
         public List<IMonster> GetMonstersAll()
         {
-            List<IMonster> monstersList = new List<IMonster>();
-            monstersList.Add(new Monster1());
-            monstersList.Add(new Monster2());
-            monstersList.Add(new MonsterBoss1());
-            monstersList.Add(new Monster3());
-            monstersList.Add(new Monster4());
-            monstersList.Add(new Monster5());
-            return monstersList;
+            List<IMonster> initMonstersList = MonsterLib.GetMonsterList();
+            return initMonstersList;
             
         }
 
