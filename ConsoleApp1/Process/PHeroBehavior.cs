@@ -28,16 +28,6 @@ namespace ConsoleApp1.Process
         }
 
 
-
-        public void GetDefaultSkill(IHero theHero)
-        {
-
-            ISkill defaultSkill = new FireBall();
-
-            theHero.AddSkill(defaultSkill);
-            
-        }
-
         public void GetDefaultJob(IHero hero)
         {
 
