@@ -10,7 +10,7 @@ namespace ConsoleApp1.Monster.Lib
 {
     public class MonsterLib : IMonsterLib
     {
-        
+
         private List<IMonster> InitMonstersList()
         {
             List<IMonster> MonstersList = new List<IMonster>() {
@@ -40,7 +40,7 @@ namespace ConsoleApp1.Monster.Lib
         public List<IMonster> GetMonsterList()
         {
             List<IMonster> monstersList = InitMonstersList();
-            
+
             return monstersList;
         }
     }
