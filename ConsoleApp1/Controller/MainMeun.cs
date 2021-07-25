@@ -1,5 +1,7 @@
 ﻿using ConsoleApp1.Hero;
 using ConsoleApp1.Process;
+using ConsoleApp1.Task;
+using ConsoleApp1.Task.Lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,21 +15,39 @@ namespace ConsoleApp1.Controller
         PHeroBehavior pHeroBehavior;
         AdventureMeun adventureMeun;
         IHero heroA;
-
+        ITaskLib taskLib;
+        ITaskProvider taskProvider;
         public bool IsExitGame = false;
 
         public MainMeun()
         {
             pHeroBehavior = new PHeroBehavior();
+        }
+
+        private void InitGame()
+        {
+            Console.WriteLine("資源載入中....");
+            taskLib = new TaskLib();
+            taskProvider = new TaskProvider(taskLib);
+
             heroA = new HeroA();
-            
+
+            Console.WriteLine("資源載入完成....");
+            Console.ReadLine();
+
         }
 
         private void StartNewGame() {
             Console.WriteLine("開始新遊戲嗎? (Y/N)");
 
+
+
             if (Console.ReadLine() == "Y")
             {
+                InitGame();
+
+                heroA.AcceptTask(taskProvider.GetMainTalkByHero(heroA));
+
                 pHeroBehavior.StartNaming(heroA);
                 pHeroBehavior.GetDefaultJob(heroA);
 

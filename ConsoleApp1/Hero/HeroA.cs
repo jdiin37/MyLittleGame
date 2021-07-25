@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.BaseInterface;
 using ConsoleApp1.Skill;
+using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,6 +27,7 @@ namespace ConsoleApp1.Hero
         public int Defense = 1;
 
         public List<ISkill> SkillList = new List<ISkill>();
+        public List<ITask> TaskList = new List<ITask>();
 
         public IHeroJob Job;
         public IHeroExpCalculater HeroExpCalculater;
@@ -238,6 +240,18 @@ namespace ConsoleApp1.Hero
         public int GetExp()
         {
             return this.Exp;
+        }
+
+        public void AcceptTask(ITask task)
+        {
+            this.TaskList.Add(task);
+            task.StartTask();
+        }
+
+
+        public List<ITask> GetAllAcceptTask()
+        {
+            return this.TaskList;
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -29,5 +30,9 @@ namespace ConsoleApp1.Hero
         public void ChangeJob(IHeroJob job);
 
         public int GetExp();
+
+        public void AcceptTask(ITask task);
+
+        public List<ITask> GetAllAcceptTask();
     }
 }
