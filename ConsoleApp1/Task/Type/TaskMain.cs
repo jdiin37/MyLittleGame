@@ -17,6 +17,7 @@ namespace ConsoleApp1.Task.Type
 
         public List<string> TalkList;
 
+        public object CompleteConditions;
 
         public IReward Reward;
 
