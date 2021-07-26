@@ -1,11 +1,13 @@
 ﻿
+using ConsoleApp1.Hero;
+
 namespace ConsoleApp1.Task
 {
     public interface ITask
     {
-        public void StartTask();
+        public void TaskStart(IHero hero);
 
-        public void CompelteTask();
+        public void TaskCompleted(IHero hero);
 
         public string GetName();
 

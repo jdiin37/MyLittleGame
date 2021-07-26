@@ -6,8 +6,10 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Hero
 {
-    public interface IHeroLvUp
+    public interface IHeroFactory
     {
-        public void LvUp(IHero hero);
+        public IHero CreateHero(string heroName,IHeroJob heroJob);
+
+        public IHero CreateHero();
     }
 }

@@ -4,7 +4,8 @@ namespace ConsoleApp1.Task
 {
     public interface ITaskProvider
     {
-        public ITask GetMainTalkByHero(IHero hero);
+        public ITask GetMainTaskByHero(IHero hero);
+        public ITask GetFirstTask();
 
     }
 }

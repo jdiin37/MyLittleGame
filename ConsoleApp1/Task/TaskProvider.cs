@@ -19,7 +19,14 @@ namespace ConsoleApp1.Task
             allTaskList = TaskLib.GetAllTaskList();
         }
 
-        public ITask GetMainTalkByHero(IHero hero)
+        public ITask GetFirstTask()
+        {
+            return allTaskList.Where(x => x.GetStartLv() == 1).FirstOrDefault();
+
+        }
+
+
+        public ITask GetMainTaskByHero(IHero hero)
         {
             var heroCompleteTask = hero.GetAllAcceptTask().Where(x => x.IsCompleted()).Select(x => x.GetName()).ToArray();
             var tasks = allTaskList.Where(x => x.GetStartLv() <= hero.GetLv()).ToList();

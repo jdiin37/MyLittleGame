@@ -41,6 +41,7 @@ namespace ConsoleApp1.Controller
             Console.WriteLine(" [2] 打怪");
             Console.WriteLine(" [3] 休息");
             Console.WriteLine(" [4] 閒聊");
+            Console.WriteLine(" [9] 任務清單");
             Console.WriteLine(" [Exit] 離開遊戲");
             Console.WriteLine("@==================@");
 
@@ -67,11 +68,24 @@ namespace ConsoleApp1.Controller
             {
                 TalkSomthing();
             }
+            else if (cmd == "9")
+            {
+                ShowTaskList();
+            }
             else if (cmd == "Exit")
             {
                 ExitGame();
             }
 
+        }
+
+        private void ShowTaskList()
+        {
+            Console.WriteLine("--任務名稱 / 狀態--");
+            foreach (var task in hero.GetAllAcceptTask())
+            {
+                Console.WriteLine("--{0} / {1}--", task.GetName(), task.IsCompleted()? "已完成" : "進行中");
+            }
         }
 
         private void TalkSomthing()

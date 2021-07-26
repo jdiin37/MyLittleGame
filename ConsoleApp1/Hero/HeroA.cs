@@ -174,7 +174,7 @@ namespace ConsoleApp1.Hero
 
         public void AddExp(int exp)
         {
-            Console.WriteLine("獲得 {0} 點經驗值", exp);
+            Console.WriteLine(" [{0}] 獲得 {1} 點經驗值",this.Name, exp);
 
             this.Exp += exp;
 
@@ -245,7 +245,7 @@ namespace ConsoleApp1.Hero
         public void AcceptTask(ITask task)
         {
             this.TaskList.Add(task);
-            task.StartTask();
+            task.TaskStart(this);
         }
 
 

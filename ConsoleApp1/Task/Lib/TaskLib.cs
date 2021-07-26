@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Task.Reward;
+﻿using ConsoleApp1.Task.Process;
+using ConsoleApp1.Task.Reward;
 using ConsoleApp1.Task.Type;
 using System;
 using System.Collections.Generic;
@@ -15,13 +16,10 @@ namespace ConsoleApp1.Task.Lib
 
         private ITask InitTaskMainFirst()
         {
+            string taskName = "故事開始了";
             IReward reward = new RewardNormal(100);
-            List<string> talkList = new List<string>()
-            {
-                " [故事開始了....]",
-                " [你是....?]",
-            };
-            TaskMain newTaskMain = new TaskMain("故事開始了",1, talkList, reward);
+            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
+            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
 
             return newTaskMain;
         }

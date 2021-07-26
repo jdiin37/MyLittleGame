@@ -12,16 +12,15 @@ namespace ConsoleApp1.Controller
 {
     public class MainMeun
     {
-        PHeroBehavior pHeroBehavior;
         AdventureMeun adventureMeun;
         IHero heroA;
         ITaskLib taskLib;
         ITaskProvider taskProvider;
+        IHeroFactory heroFactory;
         public bool IsExitGame = false;
 
         public MainMeun()
         {
-            pHeroBehavior = new PHeroBehavior();
         }
 
         private void InitGame()
@@ -29,8 +28,7 @@ namespace ConsoleApp1.Controller
             Console.WriteLine("資源載入中....");
             taskLib = new TaskLib();
             taskProvider = new TaskProvider(taskLib);
-
-            heroA = new HeroA();
+            heroFactory = new HeroFactory();
 
             Console.WriteLine("資源載入完成....");
             Console.ReadLine();
@@ -46,10 +44,9 @@ namespace ConsoleApp1.Controller
             {
                 InitGame();
 
-                heroA.AcceptTask(taskProvider.GetMainTalkByHero(heroA));
+                heroA = heroFactory.CreateHero();
+                heroA.AcceptTask(taskProvider.GetFirstTask());
 
-                pHeroBehavior.StartNaming(heroA);
-                pHeroBehavior.GetDefaultJob(heroA);
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())
