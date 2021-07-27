@@ -47,9 +47,14 @@ namespace ConsoleApp1.Monster.Lib
         private void AddDropItemToMonster(List<IMonster> monstersList)
         {
             monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault().AddDropItem(itemLib.GetItemByName("普通鋼盔").SetDropPercentage(100));
-            monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault().AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(30));
+            monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault().AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(20));
 
             monstersList.Where(x => x.GetName() == "史萊姆").FirstOrDefault().AddDropItem(itemLib.GetItemByName("咖波頭盔").SetDropPercentage(10));
+            monstersList.Where(x => x.GetName() == "史萊姆").FirstOrDefault().AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(30));
+
+            monstersList.Where(x => x.GetName() == "狼人").FirstOrDefault().AddDropItem(itemLib.GetItemByName("咖波盔甲").SetDropPercentage(10));
+
+            monstersList.Where(x => x.GetName() == "小精靈").FirstOrDefault().AddDropItem(itemLib.GetItemByName("咖波拳套").SetDropPercentage(10));
         }
 
         public List<IMonster> GetMonsterList()
