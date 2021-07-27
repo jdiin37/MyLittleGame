@@ -1,11 +1,7 @@
-﻿
-
-using ConsoleApp1.Hero;
-using ConsoleApp1.Task;
+﻿using ConsoleApp1.Hero;
 using ConsoleApp1.Task.Process;
 using ConsoleApp1.Task.Reward;
 using System;
-using System.Collections.Generic;
 
 namespace ConsoleApp1.Task.Type
 {
@@ -33,7 +29,7 @@ namespace ConsoleApp1.Task.Type
         public void TaskCompleted(IHero hero)
         {
             this.IsComplete = true;
-            Console.WriteLine(" [{0}] 已完成 {1},獲得獎勵 {2} Exp", hero.GetName(), this.GetName(), Reward.GetRewardExp());
+            Console.WriteLine(" [{0}] 已完成任務 {1}", hero.GetName(), this.GetName());
             hero.AddExp(Reward.GetRewardExp());
         }
 

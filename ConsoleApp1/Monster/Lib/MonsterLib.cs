@@ -1,18 +1,23 @@
-﻿using ConsoleApp1.Monster.Model;
+﻿using ConsoleApp1.Item.Lib;
+using ConsoleApp1.Monster.Model;
 using ConsoleApp1.Skill;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Monster.Lib
 {
     public class MonsterLib : IMonsterLib
     {
+        IItemLib itemLib;
+        public MonsterLib()
+        {
+            itemLib = new ItemLib();
+        }
 
         private List<IMonster> InitMonstersList()
         {
+
+
             List<IMonster> MonstersList = new List<IMonster>() {
                 new MonsterNormal(new MonsterProperty{
                     Name = "哥布林",Lv=1,MaxHp=100,MaxMp=50,Str=10,Int=5,Defense=0,Exp=50
@@ -34,13 +39,23 @@ namespace ConsoleApp1.Monster.Lib
                 },new List<ISkill>{new Blizzard(),new StrongAttack()}
                 )
             };
+
+
             return MonstersList;
+        }
+
+        private void AddDropItemToMonster(List<IMonster> monstersList)
+        {
+            monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault().AddDropItem(itemLib.GetItemByName("普通鋼盔").SetDropPercentage(100));
+            monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault().AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(30));
+
+            monstersList.Where(x => x.GetName() == "史萊姆").FirstOrDefault().AddDropItem(itemLib.GetItemByName("咖波頭盔").SetDropPercentage(10));
         }
 
         public List<IMonster> GetMonsterList()
         {
             List<IMonster> monstersList = InitMonstersList();
-
+            AddDropItemToMonster(monstersList);
             return monstersList;
         }
     }

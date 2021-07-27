@@ -41,6 +41,8 @@ namespace ConsoleApp1.Controller
             Console.WriteLine(" [2] 打怪");
             Console.WriteLine(" [3] 休息");
             Console.WriteLine(" [4] 閒聊");
+            Console.WriteLine(" [7] 物品清單");
+            Console.WriteLine(" [8] 裝備清單");
             Console.WriteLine(" [9] 任務清單");
             Console.WriteLine(" [Exit] 離開遊戲");
             Console.WriteLine("@==================@");
@@ -68,6 +70,14 @@ namespace ConsoleApp1.Controller
             {
                 TalkSomthing();
             }
+            else if (cmd == "7")
+            {
+                ShowUseableItem();
+            }
+            else if (cmd == "8")
+            {
+                ShowWearableItem();
+            }
             else if (cmd == "9")
             {
                 ShowTaskList();
@@ -77,6 +87,16 @@ namespace ConsoleApp1.Controller
                 ExitGame();
             }
 
+        }
+
+        private void ShowUseableItem()
+        {
+            hero.ShowUseableItemList();
+        }
+
+        private void ShowWearableItem()
+        {
+            hero.ShowWearableItemList();
         }
 
         private void ShowTaskList()

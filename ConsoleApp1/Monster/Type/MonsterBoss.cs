@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Item;
 using ConsoleApp1.Monster.Model;
 using ConsoleApp1.Skill;
 using System;
@@ -27,6 +28,7 @@ namespace ConsoleApp1.Monster
         public int Exp;
 
         public List<ISkill> SkillList;
+        List<IItem> DropItems = new List<IItem>();
 
         public MonsterNormalWithSkill(MonsterProperty monsterProperty, List<ISkill> skillList)
         {
@@ -139,6 +141,28 @@ namespace ConsoleApp1.Monster
         public void GetStatus()
         {
             throw new NotImplementedException();
+        }
+
+        public List<IItem> GetDropItems()
+        {
+            List<IItem> dropItems = new List<IItem>();
+
+            Random rnd = new Random();
+            int rndNum = rnd.Next(1, 101);
+            foreach (var item in DropItems)
+            {
+                if (item.GetDropPercentage() >= rndNum)
+                {
+                    dropItems.Add(item);
+                }
+            }
+
+            return dropItems;
+        }
+
+        public void AddDropItem(IItem dropItem)
+        {
+            this.DropItems.Add(dropItem);
         }
     }
 }

@@ -1,4 +1,6 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Item;
+using ConsoleApp1.Item.WearableItem;
 using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
@@ -34,5 +36,15 @@ namespace ConsoleApp1.Hero
         public void AcceptTask(ITask task);
 
         public List<ITask> GetAllAcceptTask();
+
+        public void AddItem(IItem item);
+        public bool CheckHasItem(IItem item);
+
+        public void ShowWearableItemList();
+        public void ShowUseableItemList();
+
+        public void WaerHeadItem(IWearableItem item);
+        public void WaerBodyItem(IWearableItem item);
+        public void WaerWeaponItem(IWearableItem item);
     }
 }

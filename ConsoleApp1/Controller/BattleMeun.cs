@@ -1,12 +1,6 @@
-﻿using ConsoleApp1.BaseInterface;
-using ConsoleApp1.Hero;
+﻿using ConsoleApp1.Hero;
 using ConsoleApp1.Monster;
-using ConsoleApp1.Process;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Controller
 {
@@ -34,6 +28,7 @@ namespace ConsoleApp1.Controller
             if (!targetGuy.IsAlive())
             {
                 GetMonsterExp();
+                GetMonsterDropItem();
             }
             else if(hero.GetHp() <= 0)
             {
@@ -47,6 +42,18 @@ namespace ConsoleApp1.Controller
         private void GetMonsterExp()
         {
             hero.AddExp(targetGuy.GetExp());
+        }
+
+        private void GetMonsterDropItem()
+        {
+            foreach(var dropItem in targetGuy.GetDropItems())
+            {
+                if (!hero.CheckHasItem(dropItem))
+                {
+                    Console.WriteLine(" {0} 掉落了 {1}", targetGuy.GetName(), dropItem.GetName());
+                    hero.AddItem(dropItem);
+                }
+            }
         }
 
         public void ShowMenu()

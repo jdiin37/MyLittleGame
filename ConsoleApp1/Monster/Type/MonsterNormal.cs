@@ -1,4 +1,6 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Item;
+using ConsoleApp1.Item.Lib;
 using ConsoleApp1.Monster.Model;
 using ConsoleApp1.Skill;
 using System;
@@ -25,6 +27,8 @@ namespace ConsoleApp1.Monster
 
         public int Defense;
         public int Exp;
+
+        List<IItem> DropItems = new List<IItem>();
 
         public MonsterNormal(MonsterProperty monsterProperty)
         {
@@ -129,6 +133,28 @@ namespace ConsoleApp1.Monster
         public void GetStatus()
         {
             throw new NotImplementedException();
+        }
+
+        public List<IItem> GetDropItems()
+        {
+            List<IItem> dropItems = new List<IItem>();
+
+            Random rnd = new Random();
+            int rndNum = rnd.Next(1, 101);//chk代表1到10的亂數 
+            foreach (var item in DropItems)
+            {
+                if(item.GetDropPercentage()>= rndNum)
+                {
+                    dropItems.Add(item);
+                }
+            }
+
+            return dropItems;
+        }
+
+        public void AddDropItem(IItem dropItem)
+        {
+            this.DropItems.Add(dropItem);
         }
     }
 }

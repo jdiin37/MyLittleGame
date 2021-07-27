@@ -26,7 +26,7 @@ namespace ConsoleApp1.Hero
 
         public int GetHeroLvUpExp(IHero hero)
         {
-            return LvExpDic.ContainsKey(hero.GetLv()) ? LvExpDic[hero.GetLv()] : 99999999;
+            return LvExpDic.ContainsKey(hero.GetLv()) ? LvExpDic[hero.GetLv()] *3 : 99999999;
         }
 
     }

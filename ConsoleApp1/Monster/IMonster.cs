@@ -1,5 +1,6 @@
 ﻿using ConsoleApp1.BaseInterface;
 using ConsoleApp1.Hero;
+using ConsoleApp1.Item;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,8 @@ namespace ConsoleApp1.Monster
         public bool IsAlive();
 
         public void Attack(IBaseHero targetGuy);
+
+        public void AddDropItem(IItem dropItem);
+        public List<IItem> GetDropItems();
     }
 }

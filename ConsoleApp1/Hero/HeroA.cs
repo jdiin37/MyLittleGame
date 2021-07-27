@@ -1,4 +1,8 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Enum;
+using ConsoleApp1.Item;
+using ConsoleApp1.Item.UseableItem;
+using ConsoleApp1.Item.WearableItem;
 using ConsoleApp1.Skill;
 using ConsoleApp1.Task;
 using System;
@@ -28,6 +32,11 @@ namespace ConsoleApp1.Hero
 
         public List<ISkill> SkillList = new List<ISkill>();
         public List<ITask> TaskList = new List<ITask>();
+        public List<IItem> ItemList = new List<IItem>();
+
+        public IWearableItem HeadItem = null;
+        public IWearableItem BodyItem = null;
+        public IWearableItem WeaponItem = null;
 
         public IHeroJob Job;
         public IHeroExpCalculater HeroExpCalculater;
@@ -252,6 +261,138 @@ namespace ConsoleApp1.Hero
         public List<ITask> GetAllAcceptTask()
         {
             return this.TaskList;
+        }
+
+        public void AddItem(IItem item)
+        {
+            this.ItemList.Add(item);
+        }
+
+        public void ShowWearableItemList()
+        {
+            Console.WriteLine("[目前裝備]");
+            Console.WriteLine("[頭部] {0}", this.HeadItem == null ? "-" : HeadItem.GetName());
+            Console.WriteLine("[身體] {0}", this.BodyItem == null ? "-" : BodyItem.GetName());
+            Console.WriteLine("[武器] {0}", this.WeaponItem == null ? "-" : WeaponItem.GetName());
+
+            Console.WriteLine("[裝備清單]");
+            int index = 0;
+            Dictionary<string, string> itemDic = new Dictionary<string, string>();
+            foreach (var item in ItemList.Where(x=> x.GetType().GetInterfaces().Contains(typeof(IWearableItem))))
+            {
+                Console.Write("[{0}]", ++index);
+                item.ShowDetial();
+                itemDic.Add(index.ToString(), item.GetName());
+            }
+
+            ChooseItem(itemDic);
+
+        }
+
+        private void ChooseItem(Dictionary<string, string> itemDic)
+        {
+            Console.WriteLine("請輸入要使用的裝備代碼");
+            string itemKey = Console.ReadLine();
+            if (itemDic.ContainsKey(itemKey))
+            {
+                Console.WriteLine("你選擇了 [{0}], 要裝備嗎 (Y/N)?", itemDic[itemKey]);
+                string cmd = Console.ReadLine();
+                if (cmd == "Y" || cmd == "y")
+                {
+                    IWearableItem wearItem = (IWearableItem)this.ItemList.FirstOrDefault(x => x.GetName() == itemDic[itemKey]);
+                    if (wearItem.GetWearPart() == ItemWearPart.Head)
+                    {
+                        this.WaerHeadItem(wearItem);
+                    }
+                    else if (wearItem.GetWearPart() == ItemWearPart.Body)
+                    {
+                        this.WaerBodyItem(wearItem);
+                    }
+                    else if (wearItem.GetWearPart() == ItemWearPart.Weapon)
+                    {
+                        this.WaerWeaponItem(wearItem);
+                    }
+                }
+            }
+            else
+            {
+                Console.WriteLine("無此代碼");
+            }
+        }
+
+
+
+        public void ShowUseableItemList()
+        {
+            Console.WriteLine("[物品清單]");
+            int index = 0;
+            foreach (var item in ItemList.Where(x => x.GetType().GetInterfaces().Contains(typeof(IUseableItem))))
+            {
+                Console.Write("[{0}]", ++index);
+                item.ShowDetial();
+            }
+            Console.ReadLine();
+
+        }
+
+
+        public void WaerHeadItem(IWearableItem item)
+        {
+            this.HeadItem = item;
+            Console.WriteLine("裝備了 {0}", item.GetName());
+            refreshProperty();
+        }
+
+        public void WaerBodyItem(IWearableItem item)
+        {
+            this.BodyItem = item;
+            Console.WriteLine("裝備了 {0}", item.GetName());
+            refreshProperty();
+        }
+
+        public void WaerWeaponItem(IWearableItem item)
+        {
+            this.WeaponItem = item;
+            Console.WriteLine("裝備了 {0}", item.GetName());
+            refreshProperty();
+        }
+
+        private void refreshProperty()
+        {
+            int strAdd = (this.HeadItem == null ? 0 : this.HeadItem.GetAddStr()) +
+                (this.BodyItem == null ? 0 : this.BodyItem.GetAddStr()) +
+                (this.WeaponItem == null ? 0 : this.WeaponItem.GetAddStr());
+
+            int intAdd = (this.HeadItem == null ? 0 : this.HeadItem.GetAddInt()) +
+                (this.BodyItem == null ? 0 : this.BodyItem.GetAddInt()) +
+                (this.WeaponItem == null ? 0 : this.WeaponItem.GetAddInt());
+
+            int defenseAdd = (this.HeadItem == null ? 0 : this.HeadItem.GetAddDefense()) +
+                (this.BodyItem == null ? 0 : this.BodyItem.GetAddDefense()) +
+                (this.WeaponItem == null ? 0 : this.WeaponItem.GetAddDefense());
+
+            int hpAdd = (this.HeadItem == null ? 0 : this.HeadItem.GetAddHp()) +
+                (this.BodyItem == null ? 0 : this.BodyItem.GetAddHp()) +
+                (this.WeaponItem == null ? 0 : this.WeaponItem.GetAddHp());
+
+            int mpAdd = (this.HeadItem == null ? 0 : this.HeadItem.GetAddMp()) +
+                (this.BodyItem == null ? 0 : this.BodyItem.GetAddMp()) +
+                (this.WeaponItem == null ? 0 : this.WeaponItem.GetAddMp());
+
+
+
+
+
+            this.Str += strAdd;
+            this.Int += intAdd;
+            this.Defense += defenseAdd;
+            this.Hp += hpAdd;
+            this.Mp += mpAdd;
+        }
+
+        public bool CheckHasItem(IItem item)
+        {
+            return this.ItemList.Any(x => x.GetName() == item.GetName());
         }
     }
 }
