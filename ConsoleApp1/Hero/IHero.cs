@@ -1,6 +1,7 @@
 ﻿using ConsoleApp1.BaseInterface;
 using ConsoleApp1.Item;
 using ConsoleApp1.Item.WearableItem;
+using ConsoleApp1.Map;
 using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
@@ -46,5 +47,9 @@ namespace ConsoleApp1.Hero
         public void WaerHeadItem(IWearableItem item);
         public void WaerBodyItem(IWearableItem item);
         public void WaerWeaponItem(IWearableItem item);
+
+        public void GoInMap(IMap map);
+
+        public IMap GetMap();
     }
 }

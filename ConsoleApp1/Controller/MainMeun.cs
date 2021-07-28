@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Hero;
+using ConsoleApp1.Map;
 using ConsoleApp1.Process;
 using ConsoleApp1.Task;
 using ConsoleApp1.Task.Lib;
@@ -46,7 +47,7 @@ namespace ConsoleApp1.Controller
 
                 heroA = heroFactory.CreateHero();
                 heroA.AcceptTask(taskProvider.GetFirstTask());
-
+                heroA.GoInMap(new Map1());
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())

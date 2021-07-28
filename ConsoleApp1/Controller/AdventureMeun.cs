@@ -36,6 +36,7 @@ namespace ConsoleApp1.Controller
         {
             Console.WriteLine(" ");
             Console.WriteLine(" [{0}] 您想做什麼呢 ?", hero.GetName());
+            Console.WriteLine(" [所在地] {0} ?", hero.GetMap().GetMapName());
             Console.WriteLine("@=====冒險選單=====@");
             Console.WriteLine(" [1] 查看狀態");
             Console.WriteLine(" [2] 打怪");

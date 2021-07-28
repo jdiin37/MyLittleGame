@@ -3,6 +3,7 @@ using ConsoleApp1.Enum;
 using ConsoleApp1.Item;
 using ConsoleApp1.Item.UseableItem;
 using ConsoleApp1.Item.WearableItem;
+using ConsoleApp1.Map;
 using ConsoleApp1.Skill;
 using ConsoleApp1.Task;
 using System;
@@ -40,6 +41,7 @@ namespace ConsoleApp1.Hero
 
         public IHeroJob Job;
         public IHeroExpCalculater HeroExpCalculater;
+        private IMap Map;
 
         public HeroA()
         {
@@ -393,6 +395,16 @@ namespace ConsoleApp1.Hero
         public bool CheckHasItem(IItem item)
         {
             return this.ItemList.Any(x => x.GetName() == item.GetName());
+        }
+
+        public void GoInMap(IMap map)
+        {
+            this.Map = map;
+        }
+
+        public IMap GetMap()
+        {
+            return this.Map;
         }
     }
 }

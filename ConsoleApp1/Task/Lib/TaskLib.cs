@@ -24,6 +24,35 @@ namespace ConsoleApp1.Task.Lib
             return newTaskMain;
         }
 
+        private ITask InitTaskMain2()
+        {
+            string taskName = "我是誰";
+            IReward reward = new RewardNormal(100);
+            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
+            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
+
+            return newTaskMain;
+        }
+
+        private ITask InitTaskMain3()
+        {
+            string taskName = "現在時間";
+            IReward reward = new RewardNormal(100);
+            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
+            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
+
+            return newTaskMain;
+        }
+
+        private ITask InitTaskMain4()
+        {
+            string taskName = "開始冒險";
+            IReward reward = new RewardNormal(100);
+            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
+            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
+
+            return newTaskMain;
+        }
 
         public List<ITask> GetAllTaskList()
         {

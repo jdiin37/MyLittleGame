@@ -55,16 +55,18 @@ namespace ConsoleApp1.Task.Process
 
         private IHeroJob GetDefaultJob()
         {
-            Console.WriteLine(" [您渴望力量嗎? (Y/N))]");
-            string cmd = Console.ReadLine();
-            if(cmd == "Y")
-            {
-                return new JobDarkKnight();
-            }
-            else
-            {
-                return new JobA();
-            }
+            Console.WriteLine(" [祝您好運 !!]");
+            //string cmd = Console.ReadLine();
+            //if(cmd == "Y")
+            //{
+            //    return new JobDarkKnight();
+            //}
+            //else
+            //{
+            //    return new JobA();
+            //}
+
+            return new JobA();
         }
     }
 }
