@@ -47,7 +47,7 @@ namespace ConsoleApp1.Controller
 
                 heroA = heroFactory.CreateHero();
                 heroA.AcceptTask(taskProvider.GetFirstTask());
-                heroA.GoInMap(new Map1());
+                heroA.GoInMap(new Map1(taskProvider));
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())

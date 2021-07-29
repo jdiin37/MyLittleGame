@@ -21,20 +21,21 @@ namespace ConsoleApp1.Task
 
         public ITask GetFirstTask()
         {
-            return allTaskList.Where(x => x.GetStartLv() == 1).FirstOrDefault();
+            return allTaskList.Where(x => x.GetTaskCode() == "1").FirstOrDefault();
 
         }
 
 
-        public ITask GetMainTaskByHero(IHero hero)
+        public ITask GetMainTaskByMap(IHero hero)
         {
-            var heroCompleteTask = hero.GetAllAcceptTask().Where(x => x.IsCompleted()).Select(x => x.GetName()).ToArray();
-            var tasks = allTaskList.Where(x => x.GetStartLv() <= hero.GetLv()).ToList();
+            var heroAcceptTaskList = hero.GetAllAcceptTask().Select(x => x.GetName()).ToArray();
+            var mapTaskNameList = hero.GetMap().GetTaskNameList();
 
+            var tasks = allTaskList.Where(x => x.GetStartLv() <= hero.GetLv() && mapTaskNameList.Contains(x.GetName())).OrderBy(x=>x.GetStartLv()).ToList();
 
             foreach (var task in tasks)
             {
-                if (!heroCompleteTask.Contains(task.GetName()))
+                if (!heroAcceptTaskList.Contains(task.GetName()))
                 {
                     return task;
                 }

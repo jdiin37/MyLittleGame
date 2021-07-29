@@ -12,4 +12,10 @@ namespace ConsoleApp1.Enum
         Body,
         Weapon,
     }
+
+    public enum MapType
+    {
+        Town,
+        Field,
+    }
 }

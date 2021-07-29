@@ -11,6 +11,7 @@ namespace ConsoleApp1.Task.Process
     {
         public void TaskStart(IHero hero);
 
-
+        public void CheckTaskCompleted(IHero hero);
+        
     }
 }

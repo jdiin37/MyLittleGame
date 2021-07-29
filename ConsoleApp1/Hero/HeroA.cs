@@ -9,8 +9,6 @@ using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Hero
 {
@@ -392,9 +390,9 @@ namespace ConsoleApp1.Hero
             this.Mp += mpAdd;
         }
 
-        public bool CheckHasItem(IItem item)
+        public bool CheckHasItem(string itemName)
         {
-            return this.ItemList.Any(x => x.GetName() == item.GetName());
+            return this.ItemList.Any(x => x.GetName() == itemName);
         }
 
         public void GoInMap(IMap map)

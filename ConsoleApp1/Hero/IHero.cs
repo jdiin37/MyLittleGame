@@ -39,7 +39,7 @@ namespace ConsoleApp1.Hero
         public List<ITask> GetAllAcceptTask();
 
         public void AddItem(IItem item);
-        public bool CheckHasItem(IItem item);
+        public bool CheckHasItem(string itemName);
 
         public void ShowWearableItemList();
         public void ShowUseableItemList();

@@ -5,7 +5,7 @@ using System.Linq;
 
 namespace ConsoleApp1.Task.Process
 {
-    public class TaskProcessFirst : ITaskProcess
+    public class TaskProcess1 : ITaskProcess
     {
         public string TaskMappingName;
 
@@ -15,12 +15,16 @@ namespace ConsoleApp1.Task.Process
                 " [你是....?]",
             };
 
-        public TaskProcessFirst(string taskMappingName)
+        public TaskProcess1(string taskMappingName)
         {
             TaskMappingName = taskMappingName;
         }
 
-
+        public void CheckTaskCompleted(IHero hero)
+        {
+            ITask task = hero.GetAllAcceptTask().FirstOrDefault(x => x.GetName() == TaskMappingName);
+            task.TaskCompleted(hero);
+        }
 
         public void TaskStart(IHero hero)
         {
@@ -32,8 +36,8 @@ namespace ConsoleApp1.Task.Process
 
             hero.SetName(GetCustomHeroName());
             hero.ChangeJob(GetDefaultJob());
-            ITask task = hero.GetAllAcceptTask().FirstOrDefault(x => x.GetName() == TaskMappingName);
-            task.TaskCompleted(hero);
+
+            this.CheckTaskCompleted(hero);
         }
 
         private string GetCustomHeroName()

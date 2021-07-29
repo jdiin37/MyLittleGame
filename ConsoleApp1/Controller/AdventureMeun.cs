@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.BaseInterface;
+using ConsoleApp1.Cmd;
 using ConsoleApp1.Hero;
 using ConsoleApp1.Monster;
 using ConsoleApp1.Process;
@@ -16,6 +17,9 @@ namespace ConsoleApp1.Controller
         IHero hero;
         PAdventure pAdventure;
         PTalkSomething pTalkSomething;
+        ICmdProvider cmdProvider;
+        Dictionary<string, ICmd> baseMenuDic = new Dictionary<string, ICmd>();
+        Dictionary<string, ICmd> mapMenuDic = new Dictionary<string, ICmd>();
 
         private bool isFinish = false;
 
@@ -29,6 +33,12 @@ namespace ConsoleApp1.Controller
             this.hero = hero;
             pAdventure = new PAdventure();
             pTalkSomething = new PTalkSomething();
+            cmdProvider = new CmdProvider();
+
+            foreach (var cmd in cmdProvider.GetBaseCmdList())
+            {
+                baseMenuDic.Add(cmd.GetExcuteCode(),cmd);
+            }
         }
 
 
@@ -36,18 +46,22 @@ namespace ConsoleApp1.Controller
         {
             Console.WriteLine(" ");
             Console.WriteLine(" [{0}] 您想做什麼呢 ?", hero.GetName());
-            Console.WriteLine(" [所在地] {0} ?", hero.GetMap().GetMapName());
-            Console.WriteLine("@=====冒險選單=====@");
-            Console.WriteLine(" [1] 查看狀態");
-            Console.WriteLine(" [2] 打怪");
-            Console.WriteLine(" [3] 休息");
-            Console.WriteLine(" [4] 閒聊");
-            Console.WriteLine(" [7] 物品清單");
-            Console.WriteLine(" [8] 裝備清單");
-            Console.WriteLine(" [9] 任務清單");
-            Console.WriteLine(" [Exit] 離開遊戲");
-            Console.WriteLine("@==================@");
+            Console.WriteLine(" [所在地] {0} ", hero.GetMap().GetMapName());
+            
+            Console.WriteLine("@=====基本選單=====@");
+            foreach(var item in baseMenuDic)
+            {
+                Console.WriteLine(" [{0}] {1}", item.Key, item.Value.GetName());
+            }
 
+            mapMenuDic = hero.GetMap().GetMapCmdList();
+            Console.WriteLine("@=====地圖選單=====@");
+            foreach (var item in mapMenuDic)
+            {
+                Console.WriteLine(" [{0}] {1}", item.Key, item.Value.GetName());
+            }
+            Console.WriteLine("@==================@");
+            
             InputCmd();
 
         }
@@ -55,71 +69,24 @@ namespace ConsoleApp1.Controller
         public void InputCmd()
         {
             string cmd = Console.ReadLine();
-            if (cmd == "1")
+            if (baseMenuDic.ContainsKey(cmd))
             {
-                ShowHeroStatus();
-            }
-            else if (cmd == "2")
-            {
-                EncounterMonster();
-            }
-            else if (cmd == "3")
-            {
-                TakeBreak();
-            }
-            else if (cmd == "4")
-            {
-                TalkSomthing();
-            }
-            else if (cmd == "7")
-            {
-                ShowUseableItem();
-            }
-            else if (cmd == "8")
-            {
-                ShowWearableItem();
-            }
-            else if (cmd == "9")
-            {
-                ShowTaskList();
-            }
-            else if (cmd == "Exit")
-            {
-                ExitGame();
+                baseMenuDic[cmd].ExcuteCmd(hero);
             }
 
-        }
-
-        private void ShowUseableItem()
-        {
-            hero.ShowUseableItemList();
-        }
-
-        private void ShowWearableItem()
-        {
-            hero.ShowWearableItemList();
-        }
-
-        private void ShowTaskList()
-        {
-            Console.WriteLine("--任務名稱 / 狀態--");
-            foreach (var task in hero.GetAllAcceptTask())
+            if (mapMenuDic.ContainsKey(cmd))
             {
-                Console.WriteLine("--{0} / {1}--", task.GetName(), task.IsCompleted()? "已完成" : "進行中");
+                mapMenuDic[cmd].ExcuteCmd(hero);
             }
         }
+
 
         private void TalkSomthing()
         {
             pTalkSomething.GetATalk();
         }
 
-        private void TakeBreak()
-        {
-            hero.AddHp(9999);
-            hero.AddMp(9999);
-            Console.WriteLine(" 適當的休息過後, 您覺得精神書醒 ");
-        }
+        
         //private void EatSomthing()
         //{
         //    int addHp = 50;
@@ -133,25 +100,22 @@ namespace ConsoleApp1.Controller
         //    hero.AddMp(addMp);
         //}
 
-        private void ShowHeroStatus()
-        {
-            hero.ShowStatus();
-        }
+        
 
-        private void EncounterMonster()
-        {
-            pAdventure.EncounterMonster(hero);
-        }
+        //private void EncounterMonster()
+        //{
+        //    pAdventure.EncounterMonster(hero);
+        //}
 
-        private void ExitGame()
-        {
-            Console.WriteLine("確定要離開遊戲嗎? (Y/N)");
+        //private void ExitGame()
+        //{
+        //    Console.WriteLine("確定要離開遊戲嗎? (Y/N)");
 
-            if(Console.ReadLine() == "Y")
-            {
-                isFinish = true;
-                Console.WriteLine("掰掰! 感謝您遊玩");
-            }
-        }
+        //    if(Console.ReadLine() == "Y")
+        //    {
+        //        isFinish = true;
+        //        Console.WriteLine("掰掰! 感謝您遊玩");
+        //    }
+        //}
     }
 }

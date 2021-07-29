@@ -48,7 +48,7 @@ namespace ConsoleApp1.Controller
         {
             foreach(var dropItem in targetGuy.GetDropItems())
             {
-                if (!hero.CheckHasItem(dropItem))
+                if (!hero.CheckHasItem(dropItem.GetName()))
                 {
                     Console.WriteLine(" {0} 掉落了 {1}", targetGuy.GetName(), dropItem.GetName());
                     hero.AddItem(dropItem);

@@ -14,5 +14,7 @@ namespace ConsoleApp1.Task
         public int GetStartLv();
 
         public bool IsCompleted();
+
+        public string GetTaskCode();
     }
 }

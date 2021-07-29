@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Task.Process;
+﻿using ConsoleApp1.Task.Model;
+using ConsoleApp1.Task.Process;
 using ConsoleApp1.Task.Reward;
 using ConsoleApp1.Task.Type;
 using System;
@@ -14,53 +15,45 @@ namespace ConsoleApp1.Task.Lib
 
 
 
-        private ITask InitTaskMainFirst()
+        private ITask InitTaskMain1()
         {
-            string taskName = "故事開始了";
+            TaskProperty taskProperty = new TaskProperty {
+                TaskName = "故事開始了",
+                StartLv = 1,
+                TaskCode = "1"
+            };
+
             IReward reward = new RewardNormal(100);
-            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
-            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
+            ITaskProcess taskProcess = new TaskProcess1(taskProperty.TaskName);
+            ITask newTaskMain = new TaskMain(taskProperty, taskProcess, reward);
 
             return newTaskMain;
         }
 
         private ITask InitTaskMain2()
         {
-            string taskName = "我是誰";
-            IReward reward = new RewardNormal(100);
-            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
-            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
+            TaskProperty taskProperty = new TaskProperty
+            {
+                TaskName = "幫助老人",
+                StartLv = 1,
+                TaskCode = "2"
+            };
+            IReward reward = new RewardNormal(500);
+            ITaskProcess taskProcess = new TaskProcess2(taskProperty.TaskName);
+            ITask newTaskMain = new TaskMain(taskProperty, taskProcess, reward);
 
             return newTaskMain;
         }
 
-        private ITask InitTaskMain3()
-        {
-            string taskName = "現在時間";
-            IReward reward = new RewardNormal(100);
-            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
-            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
-
-            return newTaskMain;
-        }
-
-        private ITask InitTaskMain4()
-        {
-            string taskName = "開始冒險";
-            IReward reward = new RewardNormal(100);
-            ITaskProcess taskProcess = new TaskProcessFirst(taskName);
-            TaskMain newTaskMain = new TaskMain(taskName, 1, taskProcess, reward);
-
-            return newTaskMain;
-        }
+        
 
         public List<ITask> GetAllTaskList()
         {
 
             List<ITask> allTaskList = new List<ITask>();
 
-            allTaskList.Add(InitTaskMainFirst());
-
+            allTaskList.Add(InitTaskMain1());
+            allTaskList.Add(InitTaskMain2());
 
 
             return allTaskList;

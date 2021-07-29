@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Hero;
+using ConsoleApp1.Task.Model;
 using ConsoleApp1.Task.Process;
 using ConsoleApp1.Task.Reward;
 using System;
@@ -9,6 +10,8 @@ namespace ConsoleApp1.Task.Type
     {
         public string TaskName;
 
+        public string TaskCode;
+
         public int StartLv;
 
         public bool IsComplete = false;
@@ -17,10 +20,13 @@ namespace ConsoleApp1.Task.Type
 
         public IReward Reward;
 
-        public TaskMain(string taskName,int startLv, ITaskProcess TaskProcess, IReward reward)
+
+        public TaskMain(TaskProperty taskProperty, ITaskProcess TaskProcess, IReward reward)
         {
-            this.TaskName = taskName;
-            this.StartLv = startLv;
+            this.TaskName = taskProperty.TaskName;
+            this.TaskCode = taskProperty.TaskCode;
+            this.StartLv = taskProperty.StartLv;
+
             this.Reward = reward;
             this.TaskProcess = TaskProcess;
         }
@@ -51,6 +57,11 @@ namespace ConsoleApp1.Task.Type
         public void TaskStart(IHero hero)
         {
             TaskProcess.TaskStart(hero);
+        }
+
+        public string GetTaskCode()
+        {
+            return TaskCode;
         }
     }
 }
