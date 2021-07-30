@@ -15,7 +15,6 @@ namespace ConsoleApp1.Controller
     {
         AdventureMeun adventureMeun;
         IHero heroA;
-        ITaskLib taskLib;
         ITaskProvider taskProvider;
         IHeroFactory heroFactory;
         public bool IsExitGame = false;
@@ -27,8 +26,7 @@ namespace ConsoleApp1.Controller
         private void InitGame()
         {
             Console.WriteLine("資源載入中....");
-            taskLib = new TaskLib();
-            taskProvider = new TaskProvider(taskLib);
+            taskProvider = new TaskProvider();
             heroFactory = new HeroFactory();
 
             Console.WriteLine("資源載入完成....");
@@ -46,8 +44,8 @@ namespace ConsoleApp1.Controller
                 InitGame();
 
                 heroA = heroFactory.CreateHero();
-                heroA.AcceptTask(taskProvider.GetFirstTask());
-                heroA.GoInMap(new Map1(taskProvider));
+                heroA.ProcessTask(taskProvider.GetFirstTask());
+                heroA.GoInMap(new MapTown1(taskProvider));
 
                 adventureMeun = new AdventureMeun(heroA);
                 while (!adventureMeun.IsFinish())

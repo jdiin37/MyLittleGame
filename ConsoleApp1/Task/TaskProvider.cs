@@ -3,8 +3,6 @@ using ConsoleApp1.Task.Lib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Task
 {
@@ -13,9 +11,9 @@ namespace ConsoleApp1.Task
         ITaskLib TaskLib;
         List<ITask> allTaskList;
 
-        public TaskProvider(ITaskLib taskLib)
+        public TaskProvider()
         {
-            TaskLib = taskLib;
+            TaskLib = new TaskLib();
             allTaskList = TaskLib.GetAllTaskList();
         }
 
@@ -45,6 +43,15 @@ namespace ConsoleApp1.Task
 
         }
 
+        public List<ITask> GetTaskListByMap(IHero hero)
+        {
+            
+            var mapTaskNameList = hero.GetMap().GetTaskNameList();
 
+            var tasks = allTaskList.Where(x => x.GetStartLv() <= hero.GetLv() && mapTaskNameList.Contains(x.GetName())).OrderBy(x => x.GetStartLv()).ToList();
+
+           
+            return tasks;
+        }
     }
 }

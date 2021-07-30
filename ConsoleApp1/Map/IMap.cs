@@ -15,7 +15,7 @@ namespace ConsoleApp1.Map
     {
         public void SetMonster(List<IMonster> monsters);
 
-        public void GoInMap(IHero hero);
+       
 
         public string GetMapName();
 
@@ -25,8 +25,10 @@ namespace ConsoleApp1.Map
 
         public string GetTalk();
 
-        public ITask GetTask(IHero hero);
+        public List<ITask> GetTaskList(IHero hero);
         public string[] GetTaskNameList();
+
+        public string[] GetMonsterNameList();
 
     }
 }

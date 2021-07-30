@@ -63,5 +63,10 @@ namespace ConsoleApp1.Task.Type
         {
             return TaskCode;
         }
+
+        public ITaskProcess GetTaskProcess()
+        {
+            return this.TaskProcess;
+        }
     }
 }

@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Map
 {
-    public class Map1 : IMap
+    public class MapTown1 : IMap
     {
 
         private string name = "落雨鎮";
         private MapType mapType = MapType.Town;
         private List<ICmd> cmdList = new List<ICmd> { new CmdRest(),new CmdTalk(),new CmdReviceTask() };
-        string[] taskNameList = new string[] { "幫助老人"};
+        string[] taskNameList = new string[] { "幫助老人","河川上游"};
 
         private ITaskProvider taskProvider;
 
-        public Map1(ITaskProvider taskProvider)
+        public MapTown1(ITaskProvider taskProvider)
         {
             this.taskProvider = taskProvider;
         }
@@ -34,11 +34,6 @@ namespace ConsoleApp1.Map
         public MapType GetMapType()
         {
             return mapType;
-        }
-
-        public void GoInMap(IHero hero)
-        {
-            throw new NotImplementedException();
         }
 
         public void SetMonster(List<IMonster> monsters)
@@ -63,7 +58,7 @@ namespace ConsoleApp1.Map
 
             List<string> WordList = new List<string>
             {
-                "這裡是落雨鎮,如果你要找工作的話,快點離開吧",
+                "這裡是落雨鎮,如果你要找工作的話,就去找那個老人吧",
                 "聽說外頭有很多妖怪,你會害怕嗎?",
                 "又在下雨了..",
             };
@@ -73,14 +68,19 @@ namespace ConsoleApp1.Map
         }
 
 
-        public ITask GetTask(IHero hero)
+        public List<ITask> GetTaskList(IHero hero)
         {
-            return taskProvider.GetMainTaskByMap(hero);
+            return taskProvider.GetTaskListByMap(hero);
         }
 
         public string[] GetTaskNameList()
         {
             return taskNameList;
+        }
+
+        public string[] GetMonsterNameList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

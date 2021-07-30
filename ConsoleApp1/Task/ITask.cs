@@ -1,5 +1,6 @@
 ﻿
 using ConsoleApp1.Hero;
+using ConsoleApp1.Task.Process;
 
 namespace ConsoleApp1.Task
 {
@@ -16,5 +17,7 @@ namespace ConsoleApp1.Task
         public bool IsCompleted();
 
         public string GetTaskCode();
+        public ITaskProcess GetTaskProcess();
+
     }
 }

@@ -12,8 +12,22 @@ namespace ConsoleApp1.Task.Lib
 {
     public class TaskLib : ITaskLib
     {
+        private static List<ITask> allTaskList;
 
+        public TaskLib()
+        {
+            if (allTaskList == null)
+            {
+                InitTaskList();
+            }
+        }
 
+        private void InitTaskList()
+        {
+            allTaskList = new List<ITask>();
+            allTaskList.Add(InitTaskMain1());
+            allTaskList.Add(InitTaskMain2());
+        }
 
         private ITask InitTaskMain1()
         {
@@ -49,13 +63,6 @@ namespace ConsoleApp1.Task.Lib
 
         public List<ITask> GetAllTaskList()
         {
-
-            List<ITask> allTaskList = new List<ITask>();
-
-            allTaskList.Add(InitTaskMain1());
-            allTaskList.Add(InitTaskMain2());
-
-
             return allTaskList;
         }
     }

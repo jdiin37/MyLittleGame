@@ -1,4 +1,5 @@
 ﻿using ConsoleApp1.Hero;
+using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,9 @@ namespace ConsoleApp1.Cmd
     {
         private string name = "接收任務";
         private string excuteCode = "Q";
+
+        private Dictionary<string, ITask> taskDic = new Dictionary<string, ITask>();
+
         public string GetExcuteCode()
         {
             return excuteCode;
@@ -18,20 +22,51 @@ namespace ConsoleApp1.Cmd
 
         public void ExcuteCmd(IHero hero)
         {
-            
-
-            var task = hero.GetMap().GetTask(hero);
-
-            if(task == null)
-            {
-                Console.WriteLine(" [沒有任務]");
-                return;
-            }
-
-            hero.AcceptTask(task);
+            InitTaskList(hero);
+            ShowTaskList(hero);
+            ChooseTask(hero);
         }
 
+        private void InitTaskList(IHero hero)
+        {
+            taskDic = new Dictionary<string, ITask>();
+            var taskList = hero.GetMap().GetTaskList(hero);
 
+            int index = 1;
+            foreach (var task in taskList)
+            {
+                taskDic.Add(index.ToString(), task);
+                index++;
+            }
+        }
+
+        private void ShowTaskList(IHero hero)
+        {
+            var heroAcceptTask = hero.GetAllAcceptTask();
+            if (taskDic.Any())
+            {
+                Console.WriteLine(" [請輸入要接受/提交的任務代碼]");
+            }
+            foreach (var item in taskDic)
+            {
+                string status = "可接";
+                var IngTask = heroAcceptTask.FirstOrDefault(x => x.GetName() == item.Value.GetName());
+                if (IngTask != null)
+                {
+                    status = IngTask.IsCompleted() ? "已完成" : "進行中";
+                }
+                Console.WriteLine(" [{0}] {1} ---{2}", item.Key, item.Value.GetName(), status);
+            }
+        }
+
+        private void ChooseTask(IHero hero)
+        {
+            string cmd = Console.ReadLine();
+            if (taskDic.ContainsKey(cmd))
+            {
+                hero.ProcessTask(taskDic[cmd]);
+            }
+        }
         public string GetName()
         {
             return name;

@@ -34,7 +34,7 @@ namespace ConsoleApp1.Hero
 
         public int GetExp();
 
-        public void AcceptTask(ITask task);
+        public void ProcessTask(ITask task);
 
         public List<ITask> GetAllAcceptTask();
 
@@ -51,5 +51,6 @@ namespace ConsoleApp1.Hero
         public void GoInMap(IMap map);
 
         public IMap GetMap();
+
     }
 }

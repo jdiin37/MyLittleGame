@@ -18,4 +18,11 @@ namespace ConsoleApp1.Enum
         Town,
         Field,
     }
+
+    public enum TaskStatusType
+    {
+        NotYet,
+        Going,
+        Done
+    }
 }

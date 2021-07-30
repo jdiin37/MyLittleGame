@@ -16,14 +16,12 @@ namespace ConsoleApp1.Process
 
         Random rnd = new Random();
         readonly IMonsterProvider MonsterProvider;
-        readonly IMonsterLib MonsterLib;
 
 
 
         public PAdventure()
         {
-            MonsterLib = new MonsterLib();
-            this.MonsterProvider = new MonsterProvider(MonsterLib);
+            this.MonsterProvider = new MonsterProvider();
         }
 
         public void EncounterMonster(IHero theHero)

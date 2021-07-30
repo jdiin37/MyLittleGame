@@ -15,9 +15,9 @@ namespace ConsoleApp1.Monster
 
         IMonsterLib MonsterLib;
 
-        public MonsterProvider(IMonsterLib IMonsterLib)
+        public MonsterProvider()
         {
-            MonsterLib = IMonsterLib;
+            MonsterLib = new MonsterLib();
         }
 
         public List<IMonster> GetMonstersAll()
@@ -31,6 +31,9 @@ namespace ConsoleApp1.Monster
         {
             List<IMonster> monstersList = GetMonstersAll();
             monstersList = monstersList.Where(x => x.GetLv() <= hero.GetLv()).ToList();
+
+
+
             return monstersList;
         }
     }

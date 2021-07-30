@@ -251,12 +251,6 @@ namespace ConsoleApp1.Hero
             return this.Exp;
         }
 
-        public void AcceptTask(ITask task)
-        {
-            this.TaskList.Add(task);
-            task.TaskStart(this);
-        }
-
 
         public List<ITask> GetAllAcceptTask()
         {
@@ -397,12 +391,63 @@ namespace ConsoleApp1.Hero
 
         public void GoInMap(IMap map)
         {
+            Console.WriteLine(" [{0}] 來到了 {1}", Name, map.GetMapName());
             this.Map = map;
         }
 
         public IMap GetMap()
         {
             return this.Map;
+        }
+
+        public void ProcessTask(ITask task)
+        {
+            var taskStatus = GetTaskStatus(task);
+            
+            if(taskStatus == TaskStatusType.NotYet)
+            {
+                AcceptTask(task);
+            }
+            else 
+            {
+                var taskInHero = this.TaskList.FirstOrDefault(x => x.GetTaskCode() == task.GetTaskCode());
+                if (taskStatus == TaskStatusType.Going)
+                {
+                    taskInHero.GetTaskProcess().CheckTaskCompleted(this);
+                }
+                else if(taskStatus == TaskStatusType.Done)
+                {
+                    Console.WriteLine(" [任務 {0} 已完成]", taskInHero.GetName());
+                }
+            }
+        }
+
+        private TaskStatusType GetTaskStatus(ITask task)
+        {
+            var taskInHero = this.TaskList.FirstOrDefault(x => x.GetTaskCode() == task.GetTaskCode());
+            if (taskInHero == null)
+            {
+                return TaskStatusType.NotYet;
+            }
+            else
+            {
+                if (taskInHero.IsCompleted())
+                {
+                    return TaskStatusType.Done;
+                }
+                else
+                {
+                    return TaskStatusType.Going;
+                }
+            }
+
+
+        }
+
+        private void AcceptTask(ITask task)
+        {
+            this.TaskList.Add(task);
+            task.TaskStart(this);
         }
     }
 }
