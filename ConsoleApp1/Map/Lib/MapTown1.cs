@@ -7,49 +7,19 @@ using System.Collections.Generic;
 
 namespace ConsoleApp1.Map
 {
-    public class MapTown1 : IMap
+    public class MapTown1 : AMap
     {
 
-        private string name = "落雨鎮";
-        private MapType mapType = MapType.Town;
-        private List<ICmd> cmdList = new List<ICmd> { new CmdRest(),new CmdTalk(),new CmdReviceTask() };
-        string[] taskNameList = new string[] { "幫助老人","河川上游"};
-        string[] monsterNameList = new string[] { };
-
-        private ITaskProvider taskProvider;
-
-        public MapTown1(ITaskProvider taskProvider)
+        public MapTown1(ITaskProvider taskProvider) : base(taskProvider)
         {
-            this.taskProvider = taskProvider;
+            base.name = "落雨鎮";
+            base.mapType = MapType.Town;
+            base.cmdList = new List<ICmd> { new CmdRest(), new CmdTalk(), new CmdReviceTask() };
+            base.taskNameList = new string[] { "幫助老人", "河川上游" };
+            base.monsterNameList = new string[] { };
         }
 
-        public string GetMapName()
-        {
-            return this.name;
-        }
-
-        public MapType GetMapType()
-        {
-            return mapType;
-        }
-
-        public void SetMonster(string[] monsterNameList)
-        {
-            this.monsterNameList = monsterNameList;
-        }
-
-        public Dictionary<string, ICmd> GetMapCmdList()
-        {
-            Dictionary<string, ICmd> mapMenuDic = new Dictionary<string, ICmd>();
-            foreach (var cmd in cmdList)
-            {
-                mapMenuDic.Add(cmd.GetExcuteCode(), cmd);
-            }
-            return mapMenuDic;
-        }
-
-
-        public string GetTalk()
+        public override string GetTalk()
         {
             Random Rnd = new Random();
 
@@ -64,20 +34,5 @@ namespace ConsoleApp1.Map
             return WordList[r];
         }
 
-
-        public List<ITask> GetTaskList(IHero hero)
-        {
-            return taskProvider.GetTaskListByMap(hero);
-        }
-
-        public string[] GetTaskNameList()
-        {
-            return taskNameList;
-        }
-
-        public string[] GetMonsterNameList()
-        {
-            return this.monsterNameList;
-        }
     }
 }

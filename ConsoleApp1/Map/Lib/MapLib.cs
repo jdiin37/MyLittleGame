@@ -12,7 +12,6 @@ namespace ConsoleApp1.Map.Lib
     {
 
         ITaskProvider taskProvider = new TaskProvider();
-        IMonsterProvider monsterProvider = new MonsterProvider();
         private static List<IMap> allMapList;
 
         public MapLib()
