@@ -98,9 +98,6 @@ namespace ConsoleApp1.Monster
         #endregion
 
 
-        abstract public void Attack(IBaseHero targetGuy);
-        
-
         public string GetName()
         {
             return this.Name;
@@ -157,5 +154,7 @@ namespace ConsoleApp1.Monster
         {
             return (IMonster)this.MemberwiseClone();
         }
+
+        abstract public void Attack(IBaseHero targetGuy);
     }
 }

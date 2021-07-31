@@ -15,7 +15,7 @@ namespace ConsoleApp1.Map
             base.mapType = MapType.Field;
             base.cmdList = new List<ICmd> { new CmdKillMonster() };
             base.taskNameList = new string[] { };
-            base.monsterNameList = new string[] { "小精靈" };
+            base.monsterNameList = new string[] { "哥布林" };
         }
 
         public override string GetTalk()
