@@ -140,9 +140,9 @@ namespace ConsoleApp1.Monster
             List<IItem> dropItems = new List<IItem>();
 
             Random rnd = new Random();
-            int rndNum = rnd.Next(1, 101);//chk代表1到10的亂數 
             foreach (var item in DropItems)
             {
+                int rndNum = rnd.Next(1, 101);//chk代表1到100的亂數 
                 if(item.GetDropPercentage()>= rndNum)
                 {
                     dropItems.Add(item);
@@ -155,6 +155,11 @@ namespace ConsoleApp1.Monster
         public void AddDropItem(IItem dropItem)
         {
             this.DropItems.Add(dropItem);
+        }
+
+        public IMonster ShallowCopy()
+        {
+            return (IMonster)this.MemberwiseClone();         
         }
     }
 }

@@ -12,5 +12,7 @@ namespace ConsoleApp1.Monster
         public List<IMonster> GetMonstersAll();
 
         public List<IMonster> GetMonstersFitHero(IHero hero);
+
+        public List<IMonster> GetMonstersByMap(IHero hero);
     }
 }

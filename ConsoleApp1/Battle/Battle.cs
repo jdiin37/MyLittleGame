@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Hero;
+﻿using ConsoleApp1.Controller;
+using ConsoleApp1.Hero;
 using ConsoleApp1.Monster;
 using ConsoleApp1.Monster.Lib;
 using System;
@@ -29,19 +30,19 @@ namespace ConsoleApp1.Battle
         private IMonster GetRandomMonster(IHero theHero)
         {
             Random rnd = new Random();
-            List<IMonster> MonstersList = MonsterProvider.GetMonstersFitHero(theHero);
-            int r = rnd.Next(MonstersList.Count);
-            return MonstersList[r];
+            List<IMonster> mapMonstersList = MonsterProvider.GetMonstersByMap(theHero);
+            int r = rnd.Next(mapMonstersList.Count);
+            return mapMonstersList[r].ShallowCopy();
         }
 
         private void StartBattle(IHero hero, IMonster monster)
         {
-            //BattleMeun newBattle = new BattleMeun(hero, monster);
-            //while (!newBattle.IsBattleFinish())
-            //{
-            //    newBattle.ShowMenu();
-            //}
-            //newBattle.GetBattleReward();
+            BattleMeun newBattle = new BattleMeun(hero, monster);
+            while (!newBattle.IsBattleFinish())
+            {
+                newBattle.ShowMenu();
+            }
+            newBattle.GetBattleReward();
         }
     }
 }

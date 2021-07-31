@@ -27,6 +27,15 @@ namespace ConsoleApp1.Monster
             
         }
 
+        public List<IMonster> GetMonstersByMap(IHero hero)
+        {
+            var mapMonsterNameList = hero.GetMap().GetMonsterNameList();
+            List<IMonster> mapMonstersList = MonsterLib.GetMonsterList().Where(x=> mapMonsterNameList.Contains(x.GetName())).ToList();
+
+
+            return mapMonstersList;
+        }
+
         public List<IMonster> GetMonstersFitHero(IHero hero)
         {
             List<IMonster> monstersList = GetMonstersAll();

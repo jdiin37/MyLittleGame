@@ -8,14 +8,19 @@ namespace ConsoleApp1.Item.Lib
 {
     public class ItemLib : IItemLib
     {
-        public List<IItem> FindItemListByName(string[] itemNames)
-        {
-            return GetAllItemList().Where(x => itemNames.Contains(x.GetName())).ToList();
-        }
 
-        public List<IItem> GetAllItemList()
+        private static List<IItem> allItemsList;
+
+        public ItemLib()
         {
-            List<IItem> allItemsList = new List<IItem>
+            if(allItemsList == null)
+            {
+                InitAllItemList();
+            }
+        }
+        private void InitAllItemList()
+        {
+            allItemsList = new List<IItem>
             {
                 //Head
                 new Wearabletem(new ItemProperty{ 
@@ -30,16 +35,27 @@ namespace ConsoleApp1.Item.Lib
                 name="短刀",addStr=3,addInt=0,addDefense=5,addHp=0,desc="短刀一把",wearPart = ItemWearPart.Weapon}),
                 new Wearabletem(new ItemProperty{
                 name="咖波拳套",addStr=8,addInt=4,addDefense=14,addHp=0,desc="傳說生物配戴的拳套..",wearPart = ItemWearPart.Weapon}),
+
+                //normal Item
+                new Item("老人的錢包","破破舊舊的..")
             };
 
-
-
-            return allItemsList;
         }
+
+        public List<IItem> FindItemListByName(string[] itemNames)
+        {
+            return allItemsList.Where(x => itemNames.Contains(x.GetName())).ToList();
+        }
+
 
         public IItem GetItemByName(string itemNames)
         {
-            return GetAllItemList().FirstOrDefault(x => x.GetName() == itemNames);
+            return allItemsList.FirstOrDefault(x => x.GetName() == itemNames);
+        }
+
+        public List<IItem> GetAllItemList()
+        {
+            return allItemsList;
         }
     }
 }

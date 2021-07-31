@@ -1,9 +1,4 @@
 ﻿using ConsoleApp1.Hero;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
@@ -17,7 +12,7 @@ namespace ConsoleApp1.Cmd
         }
         public void ExcuteCmd(IHero hero)
         {
-            hero.ShowUseableItemList();
+            hero.ShowWearableItemList();
         }
 
         public string GetName()

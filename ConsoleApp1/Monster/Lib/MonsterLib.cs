@@ -8,17 +8,23 @@ namespace ConsoleApp1.Monster.Lib
 {
     public class MonsterLib : IMonsterLib
     {
+
+        private static List<IMonster> allMonsterList;
+
         IItemLib itemLib;
         public MonsterLib()
         {
             itemLib = new ItemLib();
+            if (allMonsterList == null)
+            {
+                InitMonstersList();
+                AddDropItemToMonster();
+            }
         }
 
-        private List<IMonster> InitMonstersList()
+        private void InitMonstersList()
         {
-
-
-            List<IMonster> MonstersList = new List<IMonster>() {
+            allMonsterList = new List<IMonster>() {
                 new MonsterNormal(new MonsterProperty{
                     Name = "哥布林",Lv=1,MaxHp=100,MaxMp=50,Str=10,Int=5,Defense=0,Exp=50
                 }),
@@ -39,34 +45,30 @@ namespace ConsoleApp1.Monster.Lib
                 },new List<ISkill>{new Blizzard(),new StrongAttack()}
                 )
             };
-
-
-            return MonstersList;
         }
 
-        private void AddDropItemToMonster(List<IMonster> monstersList)
+        private void AddDropItemToMonster()
         {
-            var monster = monstersList.Where(x => x.GetName() == "哥布林").FirstOrDefault();
+            var monster = allMonsterList.Where(x => x.GetName() == "哥布林").FirstOrDefault();
             monster.AddDropItem(itemLib.GetItemByName("普通鋼盔").SetDropPercentage(100));
             monster.AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(20));
             monster.AddDropItem(itemLib.GetItemByName("老人的錢包").SetDropPercentage(30));
 
-            monster = monstersList.Where(x => x.GetName() == "史萊姆").FirstOrDefault();
+            monster = allMonsterList.Where(x => x.GetName() == "史萊姆").FirstOrDefault();
             monster.AddDropItem(itemLib.GetItemByName("咖波頭盔").SetDropPercentage(10));
             monster.AddDropItem(itemLib.GetItemByName("短刀").SetDropPercentage(30));
             monster.AddDropItem(itemLib.GetItemByName("老人的錢包").SetDropPercentage(30));
 
-            monster = monstersList.Where(x => x.GetName() == "狼人").FirstOrDefault();
+            monster = allMonsterList.Where(x => x.GetName() == "狼人").FirstOrDefault();
             monster.AddDropItem(itemLib.GetItemByName("咖波盔甲").SetDropPercentage(10));
 
-            monster = monstersList.Where(x => x.GetName() == "小精靈").FirstOrDefault();
+            monster = allMonsterList.Where(x => x.GetName() == "小精靈").FirstOrDefault();
             monster.AddDropItem(itemLib.GetItemByName("咖波拳套").SetDropPercentage(10));
         }
 
         public List<IMonster> GetMonsterList()
         {
-            List<IMonster> monstersList = InitMonstersList();
-            AddDropItemToMonster(monstersList);
+            List<IMonster> monstersList = allMonsterList.ToList();
             return monstersList;
         }
     }

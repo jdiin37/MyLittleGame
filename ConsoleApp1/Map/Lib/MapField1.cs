@@ -1,13 +1,9 @@
 ﻿using ConsoleApp1.Cmd;
 using ConsoleApp1.Enum;
 using ConsoleApp1.Hero;
-using ConsoleApp1.Monster;
 using ConsoleApp1.Task;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ConsoleApp1.Map
 {
@@ -18,7 +14,7 @@ namespace ConsoleApp1.Map
         private MapType mapType = MapType.Field;
         private List<ICmd> cmdList = new List<ICmd> { new CmdKillMonster()};
         string[] taskNameList = new string[] {};
-        List<IMonster> monsters = new List<IMonster>();
+        string[] monsterNameList = new string[] { "哥布林", "史萊姆", "狼人" };
 
         private ITaskProvider taskProvider;
 
@@ -39,9 +35,9 @@ namespace ConsoleApp1.Map
 
       
 
-        public void SetMonster(List<IMonster> monsters)
+        public void SetMonster(string[] monsterNameList)
         {
-            this.monsters = monsters;
+            this.monsterNameList = monsterNameList;
         }
 
         public Dictionary<string, ICmd> GetMapCmdList()
@@ -82,7 +78,7 @@ namespace ConsoleApp1.Map
 
         public string[] GetMonsterNameList()
         {
-            throw new NotImplementedException();
+            return this.monsterNameList;
         }
     }
 }

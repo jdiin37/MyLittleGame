@@ -21,5 +21,9 @@ namespace ConsoleApp1.Monster
 
         public void AddDropItem(IItem dropItem);
         public List<IItem> GetDropItems();
+
+        public IMonster ShallowCopy();
+        
+
     }
 }

@@ -320,7 +320,7 @@ namespace ConsoleApp1.Hero
         {
             Console.WriteLine("[物品清單]");
             int index = 0;
-            foreach (var item in ItemList.Where(x => x.GetType().GetInterfaces().Contains(typeof(IUseableItem))))
+            foreach (var item in ItemList.Where(x => !x.GetType().GetInterfaces().Contains(typeof(IWearableItem))))
             {
                 Console.Write("[{0}]", ++index);
                 item.ShowDetial();

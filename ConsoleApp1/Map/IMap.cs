@@ -13,7 +13,7 @@ namespace ConsoleApp1.Map
 {
     public interface IMap
     {
-        public void SetMonster(List<IMonster> monsters);
+        public void SetMonster(string[] monsterNameList);
 
        
 

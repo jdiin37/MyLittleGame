@@ -1,4 +1,5 @@
-﻿using ConsoleApp1.Hero;
+﻿using ConsoleApp1.Battle;
+using ConsoleApp1.Hero;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,13 @@ namespace ConsoleApp1.Cmd
     {
         private string name = "打怪";
         private string excuteCode = "K";
+        private IBattle battle;
+
+        public CmdKillMonster()
+        {
+            battle = new Battle.Battle();
+        }
+
         public string GetExcuteCode()
         {
             return excuteCode;
@@ -18,7 +26,7 @@ namespace ConsoleApp1.Cmd
 
         public void ExcuteCmd(IHero hero)
         {
-            Console.WriteLine(" 遇到了怪物");
+            battle.EncounterMonster(hero);
         }
 
 
