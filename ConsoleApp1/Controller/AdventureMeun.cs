@@ -15,8 +15,6 @@ namespace ConsoleApp1.Controller
     {
 
         IHero hero;
-        PAdventure pAdventure;
-        PTalkSomething pTalkSomething;
         ICmdProvider cmdProvider;
         Dictionary<string, ICmd> baseMenuDic = new Dictionary<string, ICmd>();
         Dictionary<string, ICmd> mapMenuDic = new Dictionary<string, ICmd>();
@@ -31,8 +29,6 @@ namespace ConsoleApp1.Controller
         public AdventureMeun(IHero hero)
         {
             this.hero = hero;
-            pAdventure = new PAdventure();
-            pTalkSomething = new PTalkSomething();
             cmdProvider = new CmdProvider();
 
             foreach (var cmd in cmdProvider.GetBaseCmdList())
@@ -81,10 +77,7 @@ namespace ConsoleApp1.Controller
         }
 
 
-        private void TalkSomthing()
-        {
-            pTalkSomething.GetATalk();
-        }
+       
 
         
         //private void EatSomthing()

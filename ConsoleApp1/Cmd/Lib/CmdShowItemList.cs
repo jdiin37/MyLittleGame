@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdShowItemList : ICmd
+    public class CmdShowItemList : ACmd
     {
-        private string name = "物品";
-        private string excuteCode = "2";
-        public string GetExcuteCode()
+        public CmdShowItemList()
         {
-            return excuteCode;
-        }
-        public void ExcuteCmd(IHero hero)
-        {
-            hero.ShowUseableItemList();
+            this.name = "物品";
+            this.excuteCode = "2";
         }
 
-        public string GetName()
+        public override void ExcuteCmd(IHero hero)
         {
-            return name;
+            hero.ShowUseableItemList();
         }
     }
 }

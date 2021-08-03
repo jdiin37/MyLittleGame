@@ -7,26 +7,20 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdRest : ICmd
+    public class CmdRest : ACmd
     {
-        private string name = "休息";
-        private string excuteCode = "R";
-        public string GetExcuteCode()
+
+        public CmdRest()
         {
-            return excuteCode;
+            this.name = "休息";
+            this.excuteCode = "R";
         }
 
-        public void ExcuteCmd(IHero hero)
+        public override void ExcuteCmd(IHero hero)
         {
             hero.AddHp(9999);
             hero.AddMp(9999);
             Console.WriteLine(" 適當的休息過後, 您覺得精神甦醒 ");
-        }
-
-
-        public string GetName()
-        {
-            return name;
         }
     }
 }

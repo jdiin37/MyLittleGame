@@ -7,27 +7,21 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdTalk : ICmd
+    public class CmdTalk : ACmd
     {
-        private string name = "找人聊天";
-        private string excuteCode = "T";
-        public string GetExcuteCode()
+
+        public CmdTalk()
         {
-            return excuteCode;
+            this.name = "找人聊天";
+            this.excuteCode = "T";
         }
 
-        public void ExcuteCmd(IHero hero)
+        public override void ExcuteCmd(IHero hero)
         {
             string talk = hero.GetMap().GetTalk();
 
             Console.WriteLine("\"{0}\"", talk);
             Console.ReadLine();
-        }
-
-
-        public string GetName()
-        {
-            return name;
         }
     }
 }

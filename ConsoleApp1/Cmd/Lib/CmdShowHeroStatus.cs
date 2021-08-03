@@ -7,22 +7,17 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdShowHeroStatus : ICmd
+    public class CmdShowHeroStatus : ACmd
     {
-        private string name = "狀態";
-        private string excuteCode = "1";
-        public string GetExcuteCode()
+        public CmdShowHeroStatus()
         {
-            return excuteCode;
-        }
-        public void ExcuteCmd(IHero hero)
-        {
-            hero.ShowStatus();
+            this.name = "狀態";
+            this.excuteCode = "1";
         }
 
-        public string GetName()
+        public override void ExcuteCmd(IHero hero)
         {
-            return name;
+            hero.ShowStatus();
         }
     }
 }

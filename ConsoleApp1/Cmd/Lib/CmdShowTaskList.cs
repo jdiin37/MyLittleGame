@@ -7,26 +7,22 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdShowTaskList : ICmd
+    public class CmdShowTaskList : ACmd
     {
-        private string name = "任務";
-        private string excuteCode = "4";
-        public string GetExcuteCode()
+
+        public CmdShowTaskList()
         {
-            return excuteCode;
+            this.name = "任務";
+            this.excuteCode = "4";
         }
-        public void ExcuteCmd(IHero hero)
+
+        public override void ExcuteCmd(IHero hero)
         {
             Console.WriteLine("[任務名稱 / 狀態]");
             foreach (var task in hero.GetAllAcceptTask())
             {
                 Console.WriteLine(" {0} / {1}", task.GetName(), task.IsCompleted() ? "已完成" : "進行中");
             }
-        }
-
-        public string GetName()
-        {
-            return name;
         }
     }
 }

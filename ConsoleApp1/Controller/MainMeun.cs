@@ -109,7 +109,7 @@ namespace ConsoleApp1.Controller
         {
             Console.WriteLine("========================");
             Console.WriteLine(" 希望您能喜歡這個小遊戲~");
-            Console.WriteLine("by 作者");
+            Console.WriteLine(" by 作者");
             Console.WriteLine("========================");
         }
 

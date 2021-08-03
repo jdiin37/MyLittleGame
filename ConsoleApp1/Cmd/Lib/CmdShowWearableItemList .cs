@@ -2,22 +2,19 @@
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdShowWearableItemList : ICmd
+    public class CmdShowWearableItemList : ACmd
     {
-        private string name = "裝備";
-        private string excuteCode = "3";
-        public string GetExcuteCode()
+        public CmdShowWearableItemList()
         {
-            return excuteCode;
+            this.name = "裝備";
+            this.excuteCode = "3";
         }
-        public void ExcuteCmd(IHero hero)
+
+        public override void ExcuteCmd(IHero hero)
         {
             hero.ShowWearableItemList();
         }
 
-        public string GetName()
-        {
-            return name;
-        }
+       
     }
 }

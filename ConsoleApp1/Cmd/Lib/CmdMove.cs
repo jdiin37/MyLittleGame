@@ -8,29 +8,18 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdMove : ICmd
+    public class CmdMove : ACmd
     {
-        private string name = "移動";
-        private string excuteCode = "5";
         private Dictionary<string, IMap> mapDic = new Dictionary<string, IMap>();
         private IMapProvider mapProvider;
 
         public CmdMove()
         {
-            mapProvider = new MapProvider();
+            this.name = "移動";
+            this.excuteCode = "5";
+            this.mapProvider = new MapProvider();
         }
 
-        public string GetExcuteCode()
-        {
-            return excuteCode;
-        }
-
-        public void ExcuteCmd(IHero hero)
-        {
-            InitMapDic(hero);
-            ShowMoveableMapList();
-            ChooseMoveToMap(hero);
-        }
 
         private void InitMapDic(IHero hero)
         {
@@ -67,9 +56,11 @@ namespace ConsoleApp1.Cmd
             }
         }
 
-        public string GetName()
+        public override void ExcuteCmd(IHero hero)
         {
-            return name;
+            InitMapDic(hero);
+            ShowMoveableMapList();
+            ChooseMoveToMap(hero);
         }
     }
 }

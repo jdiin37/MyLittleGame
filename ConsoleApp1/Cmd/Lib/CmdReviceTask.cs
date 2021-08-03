@@ -8,23 +8,14 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdReviceTask : ICmd
+    public class CmdReviceTask : ACmd
     {
-        private string name = "接收任務";
-        private string excuteCode = "Q";
-
         private Dictionary<string, ITask> taskDic = new Dictionary<string, ITask>();
 
-        public string GetExcuteCode()
+        public CmdReviceTask()
         {
-            return excuteCode;
-        }
-
-        public void ExcuteCmd(IHero hero)
-        {
-            InitTaskList(hero);
-            ShowTaskList(hero);
-            ChooseTask(hero);
+            this.name = "接收任務";
+            this.excuteCode = "Q";
         }
 
         private void InitTaskList(IHero hero)
@@ -67,9 +58,12 @@ namespace ConsoleApp1.Cmd
                 hero.ProcessTask(taskDic[cmd]);
             }
         }
-        public string GetName()
+    
+        public override void ExcuteCmd(IHero hero)
         {
-            return name;
+            InitTaskList(hero);
+            ShowTaskList(hero);
+            ChooseTask(hero);
         }
     }
 }

@@ -7,25 +7,18 @@ using System.Threading.Tasks;
 
 namespace ConsoleApp1.Cmd
 {
-    public class CmdReturnMainMenu : ICmd
+    public class CmdReturnMainMenu : ACmd
     {
-        private string name = "回主選單";
-        private string excuteCode = "Exit";
-        public string GetExcuteCode()
+
+        public CmdReturnMainMenu()
         {
-            return excuteCode;
+            this.name = "回主選單";
+            this.excuteCode = "Exit";
         }
 
-        public void ExcuteCmd(IHero hero)
+        public override void ExcuteCmd(IHero hero)
         {
             Console.WriteLine("確定要離開遊戲嗎? (Y/N)");
-
-        }
-
-
-        public string GetName()
-        {
-            return name;
         }
     }
 }
